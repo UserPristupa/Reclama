@@ -9,7 +9,7 @@
      //  include('../head.html');
     ?>
     <body>
-    <div class="container">
+    <div class="container" id="cont">
         <!--<div class="row">
             <?php //require_once('header.html'); ?>
         </div>

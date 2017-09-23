@@ -22,7 +22,7 @@ function clientsOptions(){
 <html lang="ru-RU">
 <?php //include('../head.html') ?>
 <body>
-<div class="container">
+<div class="container" id="cont">
     <!--<div class="row">
         <?php //require_once('header.html'); ?>
     </div>
@@ -106,7 +106,7 @@ showLi('создать заказ')
 //установить максимальную дату сегодня
 document.addEventListener('DOMContentLoaded', function() {
     $('input[name = "dateOfOrdering"]').val(getDate());
-    $('input[name = "dateOfComplation"]').val(datePlusDays(14));
+    $('input[name = "dateOfComplation"]').val(/*datePlusDays*/(14));
 });
 </script>
                                 <tr>

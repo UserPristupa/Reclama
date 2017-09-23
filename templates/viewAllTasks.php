@@ -12,7 +12,7 @@ require_once 'autoload.php';
    //include_once('../head.html');
 ?>
 <body>
-<div class="container">
+<div class="container" id="cont">
     <div class="row">
         <?php //require_once("../templates/header.html"); ?>
         <?php //require_once("$_SERVER[DOCUMENT_ROOT]/templates/header.html"); ?>

@@ -13,19 +13,20 @@
 <!--        </div>-->
 <!--    </div> -->
 
-    <div class="col-lg-12" id="header">
-        <div class="row" id="container">
-            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="logo">
-                <!--<img src='/img/Acc-logo200-120.jpg'
-                     alt="imgLogo" class="img-rounded img-responsive text-right">-->
-            </div>
-                     <!--  <div class="col-lg-9" ><span class="text-center ">ADVERTISING CREATE COMPANY</span></div>-->
-            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" id="exit">
-               <!-- <img src="/img/viveska2.jpg"
-                     alt="nameFirma" class="img-rounded img-responsive text-left">
-					 <img src="./img/vihod.png" align= "absmiddle" vspace="10" hspace="5" />-->
-					 <i class="icon-exit3"></i>Выход</a></div>	
-            </div>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+			<div class="row" id="container">
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="logo">
+					<!--<img src='/img/Acc-logo200-120.jpg'
+						 alt="imgLogo" class="img-rounded img-responsive text-right">-->
+				</div>
+						 <!--  <div class="col-lg-9" ><span class="text-center ">ADVERTISING CREATE COMPANY</span></div>-->
+				<div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
+				   <!-- <img src="/img/viveska2.jpg"
+						 alt="nameFirma" class="img-rounded img-responsive text-left">
+						 <img src="./img/vihod.png" align= "absmiddle" vspace="10" hspace="5" />-->
+						<a id="exit"><i class="icon-exit3"></i>Выход</a></div>	
+				<div id="completed_successfully" style="display:none">Успешно завершено</div>
+			</div>
         </div>
     <!--</div>
 	
@@ -38,7 +39,7 @@
 </div>
 </div>-->
 <script type="text/javascript">
-$(document).ready(function () {
+/*$(document).ready(function () {
       var offset = $('#header').offset();
     var topPadding = 0;
     $(window).scroll(function() {
@@ -52,6 +53,7 @@ $(document).ready(function () {
         }
     });
 });
+*/
 document.getElementById("exit").onclick=function(){
 	var xhr = new XMLHttpRequest();
         xhr.open("POST", "/templates/deleteSession.php", false);
@@ -59,5 +61,13 @@ document.getElementById("exit").onclick=function(){
         xhr.send(null);
 		location.reload();
  //   	window.location="authorization.php";
+}
+function hide_completed()
+{
+	document.getElementById("completed_successfully").style="display: none";
+}
+function set_completed_handler(timeout){
+	document.getElementById("completed_successfully").style="display: block";
+	setTimeout(hide_completed,timeout);
 }
 </script>

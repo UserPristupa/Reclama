@@ -91,11 +91,14 @@ function activate (id/*,handler*/) {
 			return;
 		}
 		$hidden="";
+		$show_parents=false;
 //		echo $_GET['menu'];
 		if($parent_id>0&&$hide){
 			$hidden=' style="display:none"';	
 		}
-		echo '<ul'.$hidden.'>';
+		$ul_id="ul".rand();
+		echo "<ul".$hidden." id=".$ul_id.">\n";
+		
 		for($i = 0; $i < count($arr[$parent_id]);$i++) {
 			$id=$parent_id . "sub" . $i;
 			
@@ -105,16 +108,33 @@ function activate (id/*,handler*/) {
 	//        echo '<li id="'.$id.'" style="background: url('.$arr[$parent_id][$i]['image'].') no-repeat top; height: 15px; padding-left: 50px; padding-top: 50px; width: 15px;"><a  name="'.$arr[$parent_id][$i]['handler'].'" onclick="activate(\''.$id.'\',\''.$arr[$parent_id][$i]['handler'].'\')">';
 	//		echo $arr[$parent_id][$i]['title'].'</a>';
 	//
-	echo '<li id="'.$id.'"><a  href=index.php?page="'.$arr[$parent_id][$i]['title'].'"&menu='.$id.' onclick="activate(\''.$id.'\')">';
-	echo '<span class="'.$arr[$parent_id][$i]['image'].'" background-position="-90px -40px" hspace="100" vspace="100"></span>'.$arr[$parent_id][$i]['title'].'</a>';
-	        if($id==$_GET['menu'])
-			    view_menu($arr,$arr[$parent_id][$i]['id'],false);
+	$bold="";
+	if($id==$_GET['menu'])
+	{
+		$bold=" style='font-weight:bold'";
+	}
+	echo "<li id='".$id."'".$bold."><a  href=index.php?page='".$arr[$parent_id][$i]['title']."'&menu=".$id.">\n"; // onclick="activate(\''.$id.'\')"
+	echo "<span class='".$arr[$parent_id][$i]['image']."' background-position='-90px -40px' hspace='100' vspace='100'></span>".$arr[$parent_id][$i]['title']."</a>\n";
+			if($id==$_GET['menu'])
+			{
+			    $show_parents=true;
+				view_menu($arr,$arr[$parent_id][$i]['id'],false);
+			}
 		    else
-				view_menu($arr,$arr[$parent_id][$i]['id']);
-			echo '</li>';
+			{
+				$show_parents=view_menu($arr,$arr[$parent_id][$i]['id']);
+			}
+			echo "</li>\n";
 			
 		}
-		echo '</ul>';
+		echo "</ul>\n";
+		if($show_parents)
+		{
+			echo "<script>\n";
+			echo "document.getElementById('".$ul_id."').style='display:block'\n";
+			echo "</script>\n";
+		}
+		return $show_parents;
 	}
 	function get_handler_by_menu_title($title){
 		$mysql_host = 'localhost';

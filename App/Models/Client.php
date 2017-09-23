@@ -79,9 +79,10 @@ class Client extends ModelLikeTable
         $db = new Db();
         //позднее связывание для вызова с параметрами класса наследника
         //это позволит вернуть результат сразу в виде массива типа класса наследника
-
-        $res = $db->query("SELECT * FROM ".static::TABLE ." WHERE birthday BETWEEN '".$start."' AND '".$end."' ;",static::class );
+        $query = "SELECT * FROM ".self::TABLE ." WHERE DAYOFYEAR(birthday)>=DAYOFYEAR('".$start."') AND DAYOFYEAR(birthday)<=DAYOFYEAR('".$end."') ;";
+        $res = $db->query($query,self::class );
 //        var_dump('<br>$res = '.$res.'<br>');
+ //       echo $query;
         return $res;
    }
 }

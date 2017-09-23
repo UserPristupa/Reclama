@@ -41,18 +41,19 @@ else
 ?>
 <body>
 
-<div class="wrapper">
-    <div class="row">
-        <!--        подтянем header сайта если мы его помещаем в контейнер, то навигация становится на всю ширину-->
-        <!-- относительно точки	<div class="col-lg-2">
+<div class="container">
+    <div class="row" id="header">
+        <!--   wrapper      подтянем header сайта если мы его помещаем в контейнер, то навигация становится на всю ширину-->
+        <!-- относительно точки	<div class="col-lg-2">-->
         <?php require_once ('./templates/header.php'); ?>
+		
 	</div>
-    <div class="middle">
+	<div class="row"><!-- middle  -->
         <!--    подтянем menu сайта почему оно идет по всей ширире ? по идее это все в контейнере должно быть на ширину рисунка header.php-->
         <?php require_once ('./navigation.php'); ?>
-<div class="footer">
+     <!--<div class="footer">
             <div> статус: admin/user<br>имя пользователя/ник</div>      
-        </div>
+        </div>-->
     </div>
     
           
@@ -60,4 +61,21 @@ else
 </body>
 </html>
 
+<script type="text/javascript">
+/*$(document).ready(function () {
+      var offset = $('#header').offset();
+    var topPadding = 0;
+    $(window).scroll(function() {
+        if ($(window).scrollTop() > offset.top) {
+			$('#header').css('margin-top',$(window).scrollTop() - offset.top + topPadding);
+           // $('#header').stop().animate({marginTop: $(window).scrollTop() - offset.top + topPadding});
+        }
+        else {
+			$('#header').css('margin-top',0);
+           // $('#header').stop().animate({marginTop: 0});
+        }
+    });
+});
+*/
+</script>
 <?}?>

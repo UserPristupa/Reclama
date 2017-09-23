@@ -4,8 +4,8 @@
 ?>
 <div class="container">
 <div class="row">
-<div class="col-xs-12 col-sm-12 col-lg-6">
-<div class="panel panel-primary">
+<div class="col-xs-6 col-sm-6 col-lg-6 col-lg-offset-3  co-md-offset-3 text-center">
+<div class="panel panel-primary text-center">
 <div class="panel-heading">
 <h3 class="panel-title">
 Авторизация на сайте</h3>

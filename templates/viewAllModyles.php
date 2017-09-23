@@ -13,10 +13,12 @@ foreach (glob("modules/*.ttl") as $filename)
 <div>Контрольная сумма:<div id="sha256sum"></div>
 <script>
 document.getElementById("send").onclick=function() {
-                 var formData=new FormData(document.getElementById("form_file"));
+               /*  var formData=new FormData(document.getElementById("form_file"));
 			     var xhr = new XMLHttpRequest();
                  xhr.open("POST", "/templates/module_installer.php");
                  xhr.send(formData);
+				 */
+				 set_completed_handler(3000);
 			 };
 
 function sha256() {

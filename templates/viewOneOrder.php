@@ -74,7 +74,7 @@ function fIsInstall(int $isInstall){
 <title> просмотр данных заказа </title>
 <?php //include ('../head.php')?>
 <body>
-<div class="container">
+<div class="container" id="cont">
     <!--<div class="row">*header*
         <?php //require_once('header.php'); ?>
     </div>
