@@ -14,7 +14,7 @@
 
     <!-- default menu 
 	<div class="col-md-3 col-md-pull-9">-->
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="fon">
 			<div class="row" >
 	<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2" id="left-sidebar">
 	    <img class="img-circle img-sm" hspace="20" vspace="20"/> 
@@ -23,8 +23,8 @@
 		<i class="icon-copy-2"></i>-->
 		<!--<i class="box-add"></i>-->
 		<div class="menu_list">
-		<span style="margin-left: 10px">
-		<span class="fa-user"></span>
+		<span style="margin-left: 20px">
+		<span class="fa-user">
 		<?
 			require_once 'autoload.php';
 			$sid=session_id();
@@ -32,7 +32,8 @@
 			echo $res[0]->login;
 		?>
 		</span>
-		<a><span class="glyphicon glyphicon-cog btn-lg" id="profile"></span>
+		</span>
+		<a><span class="glyphicon glyphicon-cog btn-lg" style="margin-left: 100px"></span>
 		<!--<img src="./img/Настройки.png" align="right" widht="30"  height="30" hspace="10" vspace="10" id="profile"/>-->
 		</a>
 

@@ -24,6 +24,7 @@
 				   <!-- <img src="/img/viveska2.jpg"
 						 alt="nameFirma" class="img-rounded img-responsive text-left">
 						 <img src="./img/vihod.png" align= "absmiddle" vspace="10" hspace="5" />-->
+						 <div id="logo"><img src="\img\4_Grayscale_logo_on_transparent_291x67.png"/></div>
 						<a id="exit"><i class="icon-exit3"></i>Выход</a></div>	
 				<div id="completed_successfully" style="display:none">Успешно завершено</div>
 			</div>
