@@ -12,10 +12,10 @@
 ?>
 <!DOCTYPE HTML>
 <html lang="ru-RU">
-<?php// include('../head.html') ?>
+<?php //include('../head.html') ?>
 
 <body>
-<div class="container" id="cont">
+<div class="container">
     <!--<div class="row">
         <?php //require_once('header.html'); ?>
     </div>
@@ -38,15 +38,15 @@
 
             </div>
             <div class="row"><!--форма добавки материала -->
-                <div class="col-lg-6">
-                    <form  id="formOneSupplier"   method="post" action="App/controllers/controllerOneSupplier.php" >
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pading0 ">
+                    <form  id="formOneSupplier"   method="post" action="../App/controllers/controllerOneSupplier.php" >
                         <table>
-                            <thead><tr>
+                            <thead><tr class="trDisplayNone">
                                 <td>название поля</td>
                                 <td>значение поля</td></tr></thead>
                             <tbody>
                             <!-- скрытое поле для отправки маркера-->
-                            <tr style="display: none;">
+                            <tr class="trDisplayNone">
                                 <td class="text-right"><label for="addNewSupplier">скрытое поле  для отправки маркера</label></td>
                                 <td class="text-left"><input name="addNewSupplier" /></td>
                             </tr>
@@ -61,10 +61,9 @@
                                 <td class="text-left"><input size="50" name="contactPerson" placeholder="ФИО контакта максимально 100 символов" required maxlength="100" /></td>
                             </tr>
                             <tr><td class="text-right"><label for="phone0">телефон</label></td>
-                                <!--                                <input type='tel' pattern='[\+]\d{2}[\(]\d{2}[\)]\d{4}[\-]\d{4}' title='Phone Number (Format: +99(99)9999-9999)'>-->
                                 <!--                                <input type='tel' pattern='([\+]\d{2})?\d{3}[\-]\d{4}[\-]\d{3}' title='Phone Number (Format: +38 093-799-7990)'>-->
 <!--                                <td><input type='tel' name="phone0" pattern='(([\+])?\d{2}?)?\d{3}[\-]\d{4}[\-]\d{3}' title='Phone Number (Format: +380937997990 or 0937997990)'></td></tr>-->
-                                <td><input type='tel' name="phone0" pattern='\d{9,13}' title='Phone Number (Format: +380937997990 or 0937997990)'></td></tr>
+                                <td><input type='tel' name="phone0" pattern='\d{5,10}' title='Format:от 5 до10 цифр 0937997990 or 52525)'></td></tr>
                             <!---->
                             <tr><td class="text-right"> <label for="email0">email</label></td>
                                 <td><input name="email0" maxlength="50" size="50" type="email"/> </td></tr>
@@ -104,6 +103,7 @@
                                 $('.alert').remove();
                             return false;
                         });
+                        //проверка на уникальность имени поставщика
                         $('form textarea').on('blur',function () {
                             if( $(this).attr('name') == 'nameSupplier'){
                                 $(this).val($.trim($(this).val()));
@@ -115,8 +115,7 @@
                                 }
                                 if($(this).val() != ''){
                                     $('.alert').remove();
-                                    $(this).addClass('ifExistThisName');
-                                    console.log('отправляем на сервер запрос есть ли такое имя в базе поставщиков');
+                                    console.log('отправляем на сервер запрос есть ли такое имя в базе поставщиков имя должно быть уникально');
                                     jquery_send('.divForAnswerServer','post',
                                         'App/controllers/controllerOneSupplier.php',
                                         ['isExistNameSupplier','nameSupplier'],
@@ -142,27 +141,34 @@
                                 var phone0 = $(this).val();
                                     //уберем ранее выведенный перед этим предупреждающий див
                                 $(this).parent().find('.alert').remove();
-
-//                                var regExpPhone = /d{9,13}/;
-                                var regExpPhone =  /\d{5,13}/;
-
-                                if(regExpPhone.test(phone0) == true){
+                                if( testOnPhone(phone0)){
                                     //тест на правильность ввода пройден верно
                                     console.log('номер телефона введен по формату');
+                                    console.log('отправляем на сервер запрос есть ли такой телефон в базе поставщиков - он должен быть уникальным');
+                                    jquery_send('.divForAnswerServer','post',
+                                        'App/controllers/controllerOneSupplier.php',
+                                        ['isExistPhone0Supplier','phone0Supplier'],
+                                        ['',$(this).val()]);
                                 }
                                 else{
                                     $(this).before('<div class="alert alert-info"> введите телефон по формату '+ $(this).attr('title')+'</div>');
+//                                    $(this).focus();
                                     return false;
                                 }
-
-
-                                $(this).addClass('ifExistThisPhone0');
-                                console.log('отправляем на сервер запрос есть ли тако phone0  в базе поставщиков');
-                                jquery_send('.divForAnswerServer','post',
-                                    'App/controllers/controllerOneSupplier.php',
-                                    ['isExistPhone0Supplier','phone0'],
-                                    ['',$(this).val()]);
                             }
+                            if($(this).attr('name')=='email0'){
+                                var email0 = $(this).val();
+                                //уберем ранее выведенный перед этим предупреждающий див
+                                $(this).parent().find('.alert').remove();
+                                if(testOnEmail(email0)){
+                                    console.log('email0 введен по формату');
+                                    console.log('не будем отправлять на сервер запрос есть ли такой email в базе поставщиков - он должен быть уникальным или NULL по умолчанию');
+                                }
+                                else{
+                                    $(this).before('<div class="alert alert-info"> не правильный формат email </div>');
+//                                    $(this).focus();
+                                    return false;
+                                }                            }
                         });
                         $('form').submit(function () {
                             if ($(this).find('select').val() == 0) {
@@ -188,7 +194,6 @@
                                     $('.divForAnswerServer').html(data);
 //                                     return false;
 //                                    $(this).find('.alert').remove();
-                                    alert('улетели данные ' + $(this).serializeArray());
                                     console.log($(this).serializeArray());
                                 }
 

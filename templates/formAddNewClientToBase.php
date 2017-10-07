@@ -12,16 +12,16 @@
 <html lang="ru-RU">
 <?php //include('../head.html') ?>
 <body>
-<div class="container" id="cont">
+<div class="container">
     <!--<div class="row">
         <?php //require_once('header.html'); ?>
     </div>
-    <div class="row"><!-- навигация 
+    <div class="row"><!-- навигация
         <?php //include('../navigation.html');?>
         <script>
             showLi('добавить клиента')
         </script>
-        <!-- конец навигации 
+         конец навигации 
     </div>-->
     <div class="row">
         <!--<div class="col-lg-2 backForDiv">
@@ -29,16 +29,16 @@
         </div>-->
         <div class="col-lg-12 backForDiv">
             <!--строка показа времени и показа результата добавки материала в базу  -->
-            <?php  include_once 'App/html/forDisplayTimeShowAnswerServer.html'?>
+            <?php  include_once '../App/html/forDisplayTimeShowAnswerServer.html'?>
             <div class="row">
                 <div class="col-lg-12   col-md-12 col-sm-12 col-xs-12 bg-primary  h2 text-center text-info">добавление клиента в базу</div>
 
             </div>
             <div class="row"><!--форма добавки клиента в базу -->
-                <div class="col-lg-6">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pading0">
                     <form  id="formOneMaterial"   method="post" action="../App/controllers/controllerAddNewClientToBase.php" >
                         <table>
-                            <thead><tr>
+                            <thead><tr class="trDisplayNone">
                                 <td>название поля</td>
                                 <td>значение поля</td></tr></thead>
                             <tbody>
@@ -51,17 +51,17 @@
                                 <td class="text-left"><textarea cols="50" rows="2" name="nameClient" id="idNameClient" placeholder="введите название клиента max 100 символов" required ></textarea></td>
                             </tr>
                             <tr><td class="text-right"><label for="contactPerson">контактное лицо фио</label></td>
-                                <td class="text-left"><input maxlength="100" size="55"  name="contactPerson" placeholder="Иванов Иван Иванович" required /></td>
+                                <td class="text-left"><input maxlength="100" size="55"  name="contactPerson" placeholder="Иванов Иван Иванович"  /></td>
                             </tr>
                             <tr><td class="text-right"><label for="phone0">телефон 1</label></td>
-                                <td><input type="text" name="phone0" placeholder="" required pattern="\d{5,13}"/></td></tr>
+                                <td><input type="tel" name="phone0" placeholder="телефон0"  pattern="\d{5,10}" title="формат телефона от 5 до 10 цифр !"/></td></tr>
                             <tr><td class="text-right"> <label for="phone1">телефон 2</label></td>
-                                <td><input type="text" name="phone1" placeholder="" pattern="\d{5,13}" /> </td></tr>
+                                <td><input type="tel" name="phone1" placeholder="телефон1" pattern="\d{5,10}" title="формат телефона от 5 до 10 цифр !" /> </td></tr>
                             <tr><td class="text-right"><label for="email0">email</label></td>
-                                <td><input type="email" name="email0"   placeholder=""/></td>
+                                <td><input type="email" name="email0"   placeholder="vova@vova.ua" title="формат email vova@vova.ua или vova@vova.ua.com"/></td>
                             </tr>
                             <tr><td class="text-right"><label for="address">адрес клиента</label></td>
-                                <td class="text-left"><textarea cols="100" rows="2" name="address" placeholder="адресс максимум 200 символов"></textarea></td>
+                                <td class="text-left"><textarea cols="100" rows="2" name="address" title="занесите хотя бы название города/села" placeholder="адресс максимум 200 символов" required></textarea></td>
                             </tr>
 
                             <tr><td class="text-right"></td><td><input type="submit"  name="submitFromFormOneClient"/></td>
@@ -86,7 +86,7 @@
                             $(this).parent('.alert').remove();
                             $(this).val($.trim($(this).val()));
                             console.log('убрали пробелы');
-                            if((this).name == 'nameClient'){
+                            if(this.name == 'nameClient'){
                                     if($(this).val().length > 100 ) {
                                         var el = $(this);
                                         elem.value = elem.value.substr(0, 100);
@@ -109,10 +109,46 @@
                             }
                             return false;
                         });
+                        //обработка полей телефона и имейла
+                        $('form input').on('blur',function (event) {
+//                            удалили старые предупреждения о не правильном формате номера телефона
+//                            $('[class~=alertDelete]').remove();
+                            if((this.name == 'phone0' || this.name == 'phone1')&& $(this).val().length>0 ){
+                               console.log('заносили данные в поля телефона phone0 или phone1');
+                               var inputPhoneValue = $(this).val();
+//                               eсли не прошли тест на правильность - вставим предупреждение
+                               if(testOnPhone(inputPhoneValue) == false){
+                                   $(this).parent().find('[class~=alertDelete]').remove();
+                                   $(this).before('<div class="alertDelete backgroundAlertRed">формат номера от 5 до 10 цифр</div>');
+                               }else {
+//                                   $(this).prev().remove();
+                                   $(this).parent().find('[class~=alertDelete]').remove();
+                               }
+                           }
+                           if(this.name == 'email0' && $(this).val().length>0){
+                               console.log('заносили данные в полe email0');
+                               var inputEmailValue = $(this).val();
+                               if(testOnEmail(inputEmailValue) == false){
+                                   $(this).parent().find('[class~=alertDelete]').remove();
+                                   $(this).before('<div class="alertDelete backgroundAlertRed">не правильный формат email - исправьте</div>');
+                               }else {
+//                                 $(this).prev().remove();
+                                   $(this).parent().find('[class~=alertDelete]').remove();
 
+                               }
+
+                           }
+                        });
+//обязательные поля для заполнения название клиента, телефон, адрес
                         $('form').submit(function () {
-                            if ($(this).find('textarea').val() == 0) {
-                                $(this).find('textarea').before('<div class="alert alert-info">имя клиента поля для заполнения</div>');
+                            if ($(this).find('[name=nameClient]').val() == "" || $(this).find('[name=nameClient]').prev().hasClass('alert alert-info') ) {
+                                $(this).find('[name=nameClient]').prev().remove();
+                                $(this).find('[name=nameClient]').before('<div class="alert alert-info">имя клиентa обязательно только уникальное!!</div>');
+                                return false;
+                            }
+                            if($(this).find('[name=address]').val() ==""){
+                                $(this).find('[name=address]').prev().remove();
+                                $(this).find('[name=address]').before('<div class="alert alert-info">надо заполнить адрес (хотябы название города/села)</div>');
                                 return false;
                             }
 //                            $.post(
@@ -120,6 +156,9 @@
 ////                                $(this).serialize() ,   //Данные формы
 //                                $(this).serializeArray(),//сериализирует в виде массива
 //                            );
+                            //не пустим пока на сервер для добавления нового клиента
+//                            console.log('отправки на добавку нового клиента в базу нет - удалите return false на строку ниже ');
+//                            return false;
                             $.ajax({
                                 type: $(this).attr('method'),
                                 url: $(this).attr('action'),//ссылка куда идут данные,
