@@ -151,7 +151,8 @@ img{
 }
 #exit {
 	/*position: absolute;*/
-	    margin-left: 850px;
+	    margin-left: 800px;
+		float: right;
 }
 .menu_list{
 	margin-bottom: 30px;
@@ -173,7 +174,7 @@ img{
 	/*margin-left: -15px;
 	position: relative;
 	/*background: #04B486;*/
-	background-image: linear-gradient(to left,#228B22 0,#04B486 100%);
+	background-image: linear-gradient(to right,#038A67 0,#04B486 100%);
 	/*text-align: justify;
 	padding-left: 20px;
     z-index:99;*/	
@@ -197,6 +198,11 @@ img{
 .profile{
 	margin-left: 50px;
 }
+ul#menu_list li{
+margin-top: 20px;
+margin-bottom: 20px;
+}
+
 /*.header img{
     height: 100px !important;
     display: block;
@@ -277,14 +283,14 @@ margin:10px;
 	/*margin-right:10px*/
 }
 .fa-shopping-basket:before{
-	font: normal normal normal 14px/1 FontAwesome;
+	font: normal normal normal 18px/1 FontAwesome;
 	content: "\f291";
 	width:20px;
 	height:20px;
 	
 }
 .fa-cart-arrow-down:before{
-	font: normal normal normal 14px/1 FontAwesome;
+	font: normal normal normal 18px/1 FontAwesome;
 	content: "\f218";
 	width:20px;
 	height:20px;
@@ -312,7 +318,7 @@ margin:10px;
 }
 .fa-user:before{
 	/*font-family: 'fontawesome';*/
-	font: normal normal normal 14px/1 FontAwesome;
+	font: normal normal normal 18px/1 FontAwesome;
 	content: "\f007";
 	width:15;
 	height:15;
@@ -320,40 +326,40 @@ margin:10px;
 }
 .fa-bar-chart:before{
 	/*font-family: 'fontawesome';*/
-	font: normal normal normal 14px/1 FontAwesome;
+	font: normal normal normal 18px/1 FontAwesome;
 	content: "\f080";
 	width:15px;
 	height:15px;
 	
 }
 .fa-check-square-o{
-	font: normal normal normal 14px/1 FontAwesome;
+	font: normal normal normal 18px/1 FontAwesome;
 	content: "\f1fd";
 	width:15px;
 	height:15px;
     	
 }
 .fa-birthday-cake {
-    font: normal normal normal 14px/1 FontAwesome;
+    font: normal normal normal 18px/1 FontAwesome;
 	content: "\f080";
 	width:15px;
 	height:15px;
 	
 }	
 .fa-key{
-	font: normal normal normal 14px/1 FontAwesome;
+	font: normal normal normal 18px/1 FontAwesome;
 	content: "\f084";
 	width:15px;
 	height:15px;
 }
 .fa-phone{
-	font: normal normal normal 14px/1 FontAwesome;
+	font: normal normal normal 18px/1 FontAwesome;
 	content: "\f095";
 	width:15px;
 	height:15px;
 }
 .fa-first-order{
-	font: normal normal normal 14px/1 FontAwesome;
+	font: normal normal normal 18px/1 FontAwesome;
 	content: "\f2b0";
 	width:15px;
 	height:15px;
