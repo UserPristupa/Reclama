@@ -25,19 +25,19 @@ foreach ($allSuppliers as $item){
     <html lang="ru-RU">
 <title> просмотр/правка данных материала </title>
     <?php
-    //require_once('../head.html');
+   // require_once('../head.html');
     ?>
     <body>
-    <div class="container">
-        <!--<div class="row">
+    <div class="container" id="cont">
+     <!--   <div class="row">
             <?php //require_once('header.html'); ?>
         </div>
-        <div class="row"> навигация 
+        <div class="row"><!-- навигация 
             <?php //require_once('../navigation.html');?>
             <script>
                 showLi('материал');
             </script>
-            <!-- конец навигации 
+            <!-- конец навигации
         </div>-->
         <div class="row">
             <!--            начало доп блока слева
@@ -77,7 +77,7 @@ foreach ($allSuppliers as $item){
                             <tbody>
                             <tr style="display: none;"><td>id</td><td><?php echo $mat->id ?></td><td class="tdDisplayNone"><input  name="id" type="text" value="<?php echo $mat->id ?>"/></td></tr>
                             <tr><td>название</td><td><?php echo $mat->name ?></td><td class="tdDisplayNone"><input name="name" type="text" size="55" maxlength="200" title ="<?php echo $mat->name ?>" value="<?php echo $mat->name ?>"/></td></tr>
-                            <tr><td>дополнительные сведения</td><td><?php echo $mat->addCharacteristic ?></td><td class="tdDisplayNone"><textarea cols="60" rows="4" maxlength="200"  name="addCharacteristic" title="<?php echo $mat->addCharacteristic ?>" type="text" ><?php echo $mat->addCharacteristic ?></textarea></td></tr>
+                            <tr><td>дополнительные сведения</td><td><?php echo $mat->addCharacteristic ?></td><td class="tdDisplayNone"><textarea cols="60" rows="4" maxlength="200"  name="addCharacteristic" title="<?php echo $mat->addCharacteristic ?>" type="text" value="<?php echo $mat->addCharacteristic ?>"></textarea></td></tr>
                             <tr><td>единица измерения</td><td><?php echo $mat->measure ?></td><td class="tdDisplayNone"><input name="measure" maxlength="50" type="text" value="<?php echo $mat->measure ?>"/></td></tr>
                             <tr><td>форма поставки</td><td><?php echo $mat->deliveryForm ?></td><td class="tdDisplayNone"><input pattern="\d{1,4}(\.)?\d{1,2}" name="deliveryForm" type="text" value="<?php echo $mat->deliveryForm ?>"/></td></tr>
                             <tr><td>цена за единицу</td><td><?php echo $mat->priceForMeasure ?></td><td class="tdDisplayNone"><input pattern="\d{1,4}(\.)?\d{1,2}" name="priceForMeasure" type="text" value="<?php echo $mat->priceForMeasure ?>"/></td></tr>

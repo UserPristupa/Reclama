@@ -86,17 +86,19 @@ function activate (id/*,handler*/) {
 			return $arr_cat;
 		}
 	}
-	function view_menu($arr,$parent_id = 0,$hide = true) {
+	function view_menu($arr,$parent_id = 0,$hide = true,$level=0) {
 		if(empty($arr[$parent_id])) {
 			return;
 		}
-		$hidden="";
+		$padding=7*$level;
+		$hidden=' style="padding-left:'.$padding.'px"';
 		$show_parents=false;
 //		echo $_GET['menu'];
 		if($parent_id>0&&$hide){
-			$hidden=' style="display:none"';	
+			$hidden=' style="display:none; padding-left:'.$padding.'px"';	
 		}
 		$ul_id="ul".rand();
+		
 		echo "<ul".$hidden." id=".$ul_id.">\n";
 		
 		for($i = 0; $i < count($arr[$parent_id]);$i++) {
@@ -114,15 +116,15 @@ function activate (id/*,handler*/) {
 		$bold=" style='font-weight:bold'";
 	}
 	echo "<li id='".$id."'".$bold."><a  href=index.php?page='".$arr[$parent_id][$i]['title']."'&menu=".$id.">\n"; // onclick="activate(\''.$id.'\')"
-	echo "<span class='".$arr[$parent_id][$i]['image']."' background-position='-90px -40px' hspace='100' vspace='100'></span>".$arr[$parent_id][$i]['title']."</a>\n";
+	echo "<span class='".$arr[$parent_id][$i]['image']."' ></span>".$arr[$parent_id][$i]['title']."</a>\n";
 			if($id==$_GET['menu'])
 			{
 			    $show_parents=true;
-				view_menu($arr,$arr[$parent_id][$i]['id'],false);
+				view_menu($arr,$arr[$parent_id][$i]['id'],false,$level+1);
 			}
 		    else
 			{
-				$show_parents=view_menu($arr,$arr[$parent_id][$i]['id']);
+				$show_parents=view_menu($arr,$arr[$parent_id][$i]['id'],true,$level+1);
 			}
 			echo "</li>\n";
 			
@@ -131,7 +133,7 @@ function activate (id/*,handler*/) {
 		if($show_parents)
 		{
 			echo "<script>\n";
-			echo "document.getElementById('".$ul_id."').style='display:block'\n";
+			echo "document.getElementById('".$ul_id."').style='display:block;padding-left:".$padding."px'\n";
 			echo "</script>\n";
 		}
 		return $show_parents;

@@ -21,7 +21,7 @@ $('#modalViewAllMaterialsToThisOrder').on('click',function (event) {
 
             //измененеие суммы комплектующих *** почему-то не работает при повторной отправке
             if(ORDER.oldValue != ORDER.newValue){
-                jquery_send('.divForAnswerServer','get','../controllerOneOrder.php',
+                jquery_send('.divForAnswerServer','get','controllerOneOrder.php',
                     ['update','nameField','valueField','idOrder'],
                     ['',ORDER.nameFieldForUpdate,ORDER.newValue,ORDER.id]
                 );
@@ -93,7 +93,7 @@ function clickTableAllMaterialsForOrder() {
 
             var idMaterialToOrder = $(target).siblings()[0].textContent;
             console.log('id for delete = '+idMaterialToOrder);
-            jquery_send('.rezDeleteTr','post','../controllerOneOrder.php',
+            jquery_send('.rezDeleteTr','post','controllerOneOrder.php',
             ['deleteThisMaterialFromOrder','idMaterialToOrder','idOrder'],
                 ['',idMaterialToOrder,ORDER.id]);
             return false;
@@ -109,15 +109,12 @@ function clickTableAllMaterialsForOrder() {
             // если не пусто в input для update и не равны суммы до и после update
             if(countMatNew && +countMatNew!= +$(target).siblings()[4].textContent){
                 console.log('id for update = '+idMaterialToOrder + 'countMatNew = '+countMatNew);
-                jquery_send('.divForAnswerServer','post','../controllerOneOrder.php',
+                jquery_send('#rezShowModal','post','controllerOneOrder.php',
                     ['updateThisCountMaterialsForOrder','idMaterialToOrder','countMatNew'],
                     ['',idMaterialToOrder,countMatNew]
                 );
-                //сервер если успешно или не успешно должен должен прислать скрипт на удаление класса у этой строки, но только изменения в ней данных
             }else {
                 fNoUspeh();
-                //так как не удалось отправить на update запись в таблице материалов для этого заказа нужно убрать класс-маркер 
-                $(trClickInTableAllMaterialsForOrder).removeClass('updateCountMaterialToOrder');
             }
             return false;
         }
@@ -134,7 +131,7 @@ $('#modalViewAllMaterialsToThisOrder').on('hide.bs.modal',function () {
 
 //вызов функции для запроса всех материалов в этом заказе для показа их в модальном окне
 function getAllMaterialsForOrder() {
-    jquery_send('#tableAllMaterialsForOrder','post','../controllerOneOrder.php',
+    jquery_send('#tableAllMaterialsForOrder','post','controllerOneOrder.php',
         ['getAllMaterialsForOrder','idOrder'],
         ['', ORDER.id]
     );

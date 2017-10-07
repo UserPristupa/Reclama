@@ -42,13 +42,13 @@ else
 <body>
 
 <div class="container">
-    <div class="row" id="header">
+    <div class="row navbar navbar-inverse navbar-fixed-top" id="header">
         <!--   wrapper      подтянем header сайта если мы его помещаем в контейнер, то навигация становится на всю ширину-->
         <!-- относительно точки	<div class="col-lg-2">-->
         <?php require_once ('./templates/header.php'); ?>
 		
 	</div>
-	<div class="row"><!-- middle  -->
+	<div class="row" id="main_cont"><!-- middle  -->
         <!--    подтянем menu сайта почему оно идет по всей ширире ? по идее это все в контейнере должно быть на ширину рисунка header.php-->
         <?php require_once ('./navigation.php'); ?>
      <!--<div class="footer">

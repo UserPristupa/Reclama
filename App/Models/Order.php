@@ -7,33 +7,30 @@
  */
 
 namespace App\Models;
+//require '../../autoload.php';
 use App\Db;
 use App\ModelLikeTable;
 use App\FastViewTable;
+use App\Models\Payment;
 
 class Order extends ModelLikeTable
 {
     public $id;
-    public $name;
+    public $nameOrder;
     public $descriptionOrder;
     public $source;
     public $idClient;
-    public $orderPrice;//цена заказа
-    public $manufacturingPrice;//цена комплектующих
+    public $orderPrice;
+    public $manufacturingPrice;
     public $isCompleted;
-    public $isReady;//состояние готовности заказа
-                   //степень готовности заказа
-                   // 0-новый( надо еще посчитать стоимость и связаться с заказчиком),
-                    // 1-закрыт успешно,
-                    // 2-закрыт неуспешно,
-                      // 3-запущен
+    public $isReady;
     public $isInstall;
     public $dateOfOrdering;
     public $dateOfComplation;
-    public $isAllowCalculateCost;//разрешать добавлсять материалы к заказу и пересчитывать цены автоматически если они поменялись в таблице материалов
+    public $isAllowCalculateCost;
     public $isTrash;
-
-//    private $sumAllPayments;// количество проплаченных денег за заказ не входит в таблицу, а получаем из другой таблицы через запрос
+//    private $nameClient;
+    private $sumAllPayments;// количество проплаченных денег за заказ не входит в таблицу, а получаем из другой таблицы через запрос
     const TABLE = 'orders';
     const NAME_ID ='id';
 
@@ -51,22 +48,17 @@ class Order extends ModelLikeTable
 //6) sum(select sumPayment from payments) 7) можно ли менять стоимость комплектующих, если удален (isTrash=1) - то не показываем, а если не удален isTrash=0 тогда показываем
         public static function selectForView( ){
             //запрос заказов, клиентов, суммы оплаты с группировкой заказам
-            $queryOld= "SELECT  o.id AS idOrder ,o.dateOfOrdering AS dateBegin, o.dateOfComplation AS dateEnd, o.name, c.name AS nameClient , 
-                        o.orderPrice,o.isReady, o.isCompleted, SUM( p.sumPayment) AS payment
+            $queryNew= "SELECT  o.id AS idOrder ,o.dateOfOrdering AS dateBegin, o.dateOfComplation AS dateEnd, o.name, c.name AS nameClient , o.orderPrice,o.isReady, o.isCompleted, SUM( p.sumPayment) AS payment
                   FROM orders o, clients c, payments p
                   WHERE o.idClient = c.id AND o.id = p.idOrder AND o.isTrash = 0
-                  GROUP BY idOrder , nameClient , o.name
-                  ORDER BY dateBegin DESC ,nameClient, o.name ;
+                  GROUP BY idOrder
+                  ORDER BY dateBegin DESC ;
                   ";
 
             $db = new Db();
-        $queryNew= "SELECT o.id AS idOrder , o.dateOfOrdering AS dateBegin, o.dateOfComplation AS dateEnd, o.name ,  c.name AS nameClient ,
-       o.orderPrice,o.isReady, o.isCompleted, o.isTrash , SUM(p.sumPayment) AS payment
-FROM orders AS o LEFT OUTER JOIN  clients AS c ON o.idClient = c.id LEFT OUTER JOIN payments AS p ON o.id = p.idOrder
-WHERE o.isTrash = 0
-GROUP BY idOrder, nameClient, o.name
-ORDER BY dateBegin DESC ,nameClient, o.name ;
- ";
+        $queryOld= "SELECT orders.id AS idOrder , `name`, clients.name AS nameClient , orderPrice,isReady, isCompleted,  
+                  FROM orders, clients, payments
+                  WHERE idClient = clients.id ";
         $sth = $db->get_dbh()->prepare($queryNew);
         $res = $sth->execute();
         if(false != $res) {
@@ -77,12 +69,9 @@ ORDER BY dateBegin DESC ,nameClient, o.name ;
 //            var_dump('<br>последняя строка в результата нет !!! function query in Db.php<br>');
             return false;
         }
+
     }
-//** найти все удаленные заказы (в корзине) */
-    /**
-     * @return mixed
-     */
-    public static function getTrashedOrders()
+   public static function getTrashedOrders()
     {
         $queryFindTrashedOrders= "SELECT  o.id AS idOrder ,o.dateOfOrdering AS dateBegin, o.dateOfComplation AS dateEnd, o.name, c.name AS nameClient , o.orderPrice,o.isReady, o.isCompleted, SUM( p.sumPayment) AS payment
                   FROM orders o, clients c, payments p
@@ -103,18 +92,9 @@ ORDER BY dateBegin DESC ,nameClient, o.name ;
         }
     }
 
-//**найти заказы по подобию названия (покажет даже те что в корзине)
-public static function getOrdersLikeNameClient( $likeName){
-
-    $queryFindOrderLikeName = "SELECT o.id AS idOrder , o.dateOfOrdering AS dateBegin, o.dateOfComplation AS dateEnd,
-                                  o.name ,  c.name AS nameClient ,o.orderPrice,o.isReady, o.isCompleted,  SUM(p.sumPayment) AS payment
-                                  FROM orders AS o LEFT OUTER JOIN  clients AS c ON o.idClient = c.id LEFT OUTER JOIN payments AS p ON o.id = p.idOrder
-                                  WHERE c.name  LIKE '%$likeName%'
-                                  GROUP BY idOrder, nameClient, o.name
-                                  ORDER BY dateBegin DESC ,nameClient, o.name ;";
-
-    $queryFindOrderLikeNameOld= "SELECT  o.id AS idOrder ,o.dateOfOrdering AS dateBegin, o.dateOfComplation AS dateEnd,
-                              o.name, c.name AS nameClient , o.orderPrice,o.isReady, o.isCompleted, SUM( p.sumPayment) AS payment
+//**найти заказы по подобию названия
+public static function getOrdersLikeNameClient(string $likeName){
+    $queryFindOrderLikeName= "SELECT  o.id AS idOrder ,o.dateOfOrdering AS dateBegin, o.dateOfComplation AS dateEnd, o.name, c.name AS nameClient , o.orderPrice,o.isReady, o.isCompleted, SUM( p.sumPayment) AS payment
                   FROM orders o, clients c, payments p
                   WHERE o.idClient = c.id AND o.id = p.idOrder AND o.isTrash = 0 AND c.name  LIKE '%$likeName%'
                   GROUP BY idOrder
@@ -134,15 +114,8 @@ public static function getOrdersLikeNameClient( $likeName){
         return false;
     }
 }
-    public static function getOrdersLikeName( $likeName){
-        $queryFindOrderLikeName = "SELECT o.id AS idOrder , o.dateOfOrdering AS dateBegin, o.dateOfComplation AS dateEnd,
-                                  o.name ,  c.name AS nameClient ,o.orderPrice,o.isReady, o.isCompleted,  SUM(p.sumPayment) AS payment
-                                  FROM orders AS o LEFT OUTER JOIN  clients AS c ON o.idClient = c.id LEFT OUTER JOIN payments AS p ON o.id = p.idOrder
-                                  WHERE o.name  LIKE '%$likeName%'
-                                  GROUP BY idOrder, nameClient, o.name
-                                  ORDER BY dateBegin DESC ,nameClient, o.name ;";
-
-        $queryFindOrderLikeNameOld= "SELECT  o.id AS idOrder ,o.dateOfOrdering AS dateBegin, o.dateOfComplation AS dateEnd, o.name, c.name AS nameClient , o.orderPrice,o.isReady, o.isCompleted, SUM( p.sumPayment) AS payment
+    public static function getOrdersLikeName(string $likeName){
+        $queryFindOrderLikeName= "SELECT  o.id AS idOrder ,o.dateOfOrdering AS dateBegin, o.dateOfComplation AS dateEnd, o.name, c.name AS nameClient , o.orderPrice,o.isReady, o.isCompleted, SUM( p.sumPayment) AS payment
                   FROM orders o, clients c, payments p
                   WHERE o.idClient = c.id AND o.id = p.idOrder AND o.isTrash = 0 AND o.name  LIKE '%$likeName%'
                   GROUP BY idOrder
@@ -162,14 +135,13 @@ public static function getOrdersLikeNameClient( $likeName){
             return false;
         }
     }
-
-    // найти все заказы в виде объектов по подобию в названии заказа или названи клиента
+// найти все заказы в виде объектов по подобию в названии заказа или названи клиента
     /**
      * @param string  $likeNameClient
      * @param string $likeNameOrder
      * @return bool|mixed
      */
-    public static function getOrdersLikeNameOrderOrLikeNameClient(  $likeNameClient = NULL ,  $likeNameOrder = NULL){
+    public static function getOrdersLikeNameOrderOrLikeNameClient( string $likeNameClient = NULL , string $likeNameOrder = NULL){
         $queryFindOrderLikeName ="";
 //        если передали 2 параметра
         if($likeNameClient && $likeNameOrder){
@@ -193,10 +165,7 @@ public static function getOrdersLikeNameClient( $likeName){
                                    WHERE ( o.name  LIKE '%$likeNameClient%' OR c.name LIKE '%$likeNameClient%' ) AND ( o.isReady = 0 OR o.isReady = 3 )
                                    ORDER BY c.name, o.name
                                   ";
-
                 }
-
-
 //                if($likeNameClient){
 //                    $queryFindOrderLikeName = "SELECT o.id AS idOrder, o.name AS nameOrder, c.id AS idClient, c.name AS nameClient, o.isReady AS orderIsReady
 //                                   FROM orders AS o INNER JOIN  clients AS c ON o.idClient = c.id
@@ -233,10 +202,9 @@ public static function getOrdersLikeNameClient( $likeName){
         
         return false;
     }
-
-
+	
 //найти все поля закза по переданному id
-    public static function findObjByIdForViewOneOrder($id){
+    public static function findObjByIdForViewOneOrder(int $id){
 //        echo '<br>вызов из класса Order  функция findObjByIdForViewOneOrder получили результат не false<br>';
         $res = self::findObjByIdStatic($id);
 //        var_dump($res);
@@ -248,13 +216,12 @@ public static function getOrdersLikeNameClient( $likeName){
         return $cl->name;
     }
     public  function getSumAllPayments(){
-        return Payment::getSumAllPaymentsForOrder($this->id);
+        return Payment::showSumAllPayments($this->id);
     }
-    
-    //метод найдет заказ по названию если он есть такой
+	//метод найдет заказ по названию если он есть такой
     //*если есть заказ с таким именем вернет obj Order заказа
     //*если нет то вернет false
-    public static function isAllowNameOrder ( $name){
+    public static function isAllowNameOrder (string $name){
         $query = "SELECT * FROM orders WHERE orders.name = '$name';";
 //        echo 'пришел запрос на проверку названия заказа '.$query;
         $db = new  Db();

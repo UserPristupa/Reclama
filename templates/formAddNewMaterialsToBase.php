@@ -20,8 +20,8 @@ function suppliersOptions(){
 <html lang="ru-RU">
 <?php //include('../head.html') ?>
 <body>
-<div class="container">
-    <!--<div class="row">
+<div class="container" id="cont">
+   <!-- <div class="row">
         <?php //require_once('header.html'); ?>
     </div>
     <div class="row"><!-- навигация 
@@ -29,10 +29,10 @@ function suppliersOptions(){
         <script>
             showLi('добавить материалы')
         </script>
-         конец навигации 
+        <!-- конец навигации 
     </div>-->
     <div class="row">
-        <!--<div class="col-lg-2 backForDiv">
+       <!-- <div class="col-lg-2 backForDiv">
             этот див слева от таблицы в нем можно расположить дополнительные кнопки добавить редактировать удалить
         </div>-->
         <div class="col-lg-12 backForDiv">
@@ -43,27 +43,15 @@ function suppliersOptions(){
 
             </div>
             <div class="row"><!--форма добавки материала -->
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pading0">
-                    <form  id="formOneMaterial"   method="post" action="../App/controllers/controllerAddNewMaterialsToBase.php" >
+                <div class="col-lg-6">
+                    <form  id="formOneMaterial"   method="post" action="App/controllers/controllerAddNewMaterialsToBase.php" >
                         <table>
-                            <thead><tr class="trDisplayNone">
+                            <thead><tr>
                                 <td>название поля</td>
                                 <td>значение поля</td></tr></thead>
                             <tbody>
-                            <tr><td class="text-right"><label for="nameMaterial">название материла</label></td>
-                                <td class="text-left"><textarea cols="50" rows="4" name="nameMaterial" placeholder="введите название материала" required ></textarea></td>
-                            </tr>
-                            <tr><td class="text-right"><label for="addCharacteristic">дополнительные характеристики</label></td>
-                                <td class="text-left"><textarea cols="50" rows="4" name="addCharacteristic" placeholder="поставка рулоном по 4 м или режут газом по 2.86 м" required ></textarea></td>
-                            </tr>
-                            <tr>
-                                <td><label for="InputValuerSearchSupplier"> поиск поставщика по имени или допхарактеристике</label></td>
-                                <td><input type="text" name="InputValuerSearchSupplier" class="fontSizeMedium" size="35" maxlength="35" value=""
-                                           placeholder="поиск поставщика не менен 3 символов" title="введите не менене 3 символов и нажмите кнопку искать"/>
-                                    <button class="btn btn-primary" name="btnSearchSupplier"><span class="glyphicon glyphicon-search"> искать</span></button></td></tr>
-
-                            <tr><td class="text-right"><label for="idSupplier">поставщик</label></td>
-                                    <td><select name="idSupplier" class="fontSizeMedium"><option value="0"> поставщик...доп характеристики</option>
+                                <tr><td class="text-right"><label for="idSupplier">поставщик</label></td>
+                                    <td><select name="idSupplier" ><option value="0"> поставщик ... что поставляет</option>
                                             <?php echo suppliersOptions();  ?>
                                         </select>
                                     </td>
@@ -71,6 +59,12 @@ function suppliersOptions(){
                                 <tr style="display: none;">
                                     <td class="text-right"><label for="send">скрытое поле  для отправки маркера</label></td>
                                     <td class="text-left"><input  name="send"  value="sendMarker"  /></td>
+                                </tr>
+                                <tr><td class="text-right"><label for="nameMaterial">название материла</label></td>
+                                    <td class="text-left"><textarea cols="50" rows="4" name="nameMaterial" placeholder="введите название материала" required ></textarea></td>
+                                </tr>
+                                <tr><td class="text-right"><label for="addCharacteristic">дополнительные характеристики</label></td>
+                                    <td class="text-left"><textarea cols="50" rows="4" name="addCharacteristic" placeholder="поставка рулоном по 4 м или режут газом по 2.86 м" required ></textarea></td>
                                 </tr>
                                 <tr><td class="text-right"><label for="measure">единицы измерения</label></td>
                                     <td><input type="text" name="measure" placeholder="м или м погонный" required/> </td></tr>
@@ -137,29 +131,6 @@ $.ajax({
 $(this).find('.alert').remove();
 return false;
 });
-// повесим на кнопку поиска поставщика по имени (или по материалу)
-//повесим клик на кнопку поиска
-$('form [name="btnSearchSupplier"]').on('click',function () {
-    console.log('сработала кнопка поиска поставщика ');
-    var inValueNode = $('form [name = "InputValuerSearchSupplier"');
-    var inputValueSC = $.trim(inValueNode.val());
-    if(inputValueSC.length < 3 ){
-        $(inValueNode).val('');
-    }else {
-        //посылаем запрос на сервер для поиска всех клиентов по подобию
-//        jquery_send('[name=idSupplier]','post','../App/controllers/controllerAddNewMaterialsToBase.php',
-//            ['searchSuppliersLikeName','likeName'],
-//            ['',inputValueSC]
-//        );
-        jquery_send('[name=idSupplier]','post',$('form').attr('action'),
-            ['searchSuppliersLikeName','likeName'],
-            ['',inputValueSC]
-        );
-    }
-    return false;
-});
-povesitProverkuValidnostyNaInput($('[name=deliveryForm]'));
-povesitProverkuValidnostyNaInput($('[name=priceForMeasure]'));
 </script>
                 </div>
             </div><!-- .row -->

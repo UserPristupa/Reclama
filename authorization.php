@@ -13,7 +13,7 @@
 <div class="panel-body">
 <div class="row">
 
-<div class="col-xs-6 col-sm-6 col-md-6 login-box">
+<div class="col-xs-6 col-sm-6 col-md-6 login-box vcenter">
 <form role="form" name="authorization">
 <div class="input-group">
 <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
@@ -42,7 +42,7 @@
 </div>
 </div>
 -->
-<div class="col-xs-6 col-sm-6 col-md-6">
+<div class="col-xs-6 col-sm-6 col-md-6 vcenter">
 <button type="submit" class="btn btn-labeled btn-success" id="authorization">
 <span class="btn-label"><i class="glyphicon glyphicon-ok"></i></span>Войти</button>
 <button type="button" class="btn btn-labeled btn-danger">

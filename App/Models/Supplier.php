@@ -10,7 +10,7 @@ namespace App\Models;
 use App\Db;
 use App\ModelLikeTable;
 
-class Supplier extends ModelLikeTable 
+class Supplier extends ModelLikeTable
 {
     public $id;
     public $name;
@@ -29,15 +29,13 @@ class Supplier extends ModelLikeTable
     {
         // TODO: Implement isNew() method.
         if(empty($this->id) || is_null($this->id)){
-//            echo "ДА ЭТО НОВЫЙ ПОСТАВЩИК";
             return true;
         }
         else{
             return false;
         }
     }
-
-    
+   
     public static function getAllSuppliers(){
         $db = new Db();
         $query = "SELECT * FROM ".self::TABLE." ORDER BY name ; ";
@@ -48,7 +46,7 @@ class Supplier extends ModelLikeTable
 //        var_dump($res);
         return $res;
     }
-
+	
     public function getDeliveryDays(){
         switch ($this->deliveryDay){
             case 1:
@@ -83,4 +81,3 @@ class Supplier extends ModelLikeTable
     }
 
 }
-

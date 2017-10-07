@@ -4,10 +4,10 @@ require '../../autoload.php';
 
 //if (isset($_POST['submitFromFormOneMaterial'])){
 if (isset($_POST['sendClientToAddToBase'])){
-    insertNewClientToBase();
+    insertNewMaterialToBase();
 }
-//функция вставки в базу нового клиента
-function insertNewClientToBase(){
+//функция вставки в базу нового материала
+function insertNewMaterialToBase(){
     if (isset($_POST['sendClientToAddToBase'])) {
         $clNew = new \App\Models\Client();
         if (isset($_POST['nameClient'])) {

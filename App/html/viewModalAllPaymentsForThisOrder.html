@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-center" >показываем все оплаты к заказу
-                <button class="close" data-dismiss="modal" name="">x</button>
+                <button class="close" data-dismiss="modal" name="">закрыть</button>
                 <div>
                     <div class=" uspeh text-center "><span class="glyphicon glyphicon-import "> успешно</span></div>
                     <div class=" noUspeh text-center "><span class="glyphicon glyphicon-alert "> ошибка обратитесь к разработчику</span></div>
@@ -45,7 +45,8 @@
                     </div>
                 </div>
             </div><!--modal-body-->
-            <div class="modal-futer">
+            <div class="modal-futer text-right">
+                <button type="button" class="btn btn-default " data-dismiss="modal" name="">закрыть</button>
             </div>
         </div><!--modal content-->
     </div><!--modal-dialog-->
@@ -55,7 +56,7 @@
 $('#modalViewAllPaymentsToThisOrder').on('show.bs.modal',function () {
     //отправляем запрос на загрузку данных всех оплат из базы в таблицу #tableAllPaymentsForThisOrder
     console.log('отпавим запрос на получение данных всех оплат');
-    jquery_send('#tableAllPaymentsForThisOrder', 'post', '../App/controllers/controllerModalWinShowAllPayments.php',
+    jquery_send('#tableAllPaymentsForThisOrder', 'post', 'app/controllers/controllerModalWinShowAllPayments.php',
             ['loadPaymentForOrder', 'idOrder'], ['', ORDER.id]);
     //выставим дату сегодняшнюю
     //var dateThisDay = getDate();
@@ -96,7 +97,7 @@ function addPaymentInModalWinAllPayments() {
     if($('#idModalWinValPayment').val() > 0 &&  ORDER.isReady != 2 && ORDER.isReady !=1  ){
         //  отправляем запрос на добавку в базу оплаты
         console.log('добавляем оплату по этому заказу');
-        jquery_send('#modalViewAllPaymentsToThisOrder .divShowAnswerServer','post','../App/controllers/controllerModalWinShowAllPayments.php',
+        jquery_send('#modalViewAllPaymentsToThisOrder .divShowAnswerServer','post','app/controllers/controllerModalWinShowAllPayments.php',
                 ['sendPaymentForOrderFromModalWin','sumPayment','idOrder','idClient','datePayment'],
                 ['',$('#idModalWinValPayment').val(),ORDER.id,ORDER.idClient, $('#idModalWinDatePayment').val()]);
         $('#idModalWinValPayment').val('0');
@@ -118,7 +119,7 @@ function     deleteThisPaymentFromBase (event) {
                 console.log('click in table target=button trash');
                 var idPaymentForDelete = $(target).data('id');
                 console.log('хотим удалить платеж с id = '+ idPaymentForDelete);
-                jquery_send('#modalViewAllPaymentsToThisOrder .divShowAnswerServer','post','../App/controllers/controllerModalWinShowAllPayments.php',
+                jquery_send('#modalViewAllPaymentsToThisOrder .divShowAnswerServer','post','app/controllers/controllerModalWinShowAllPayments.php',
                         ['sendDeletePaymentForOrderFromModalWin','idPaymentForDelete'],
                         ['',idPaymentForDelete]);
                 return false;

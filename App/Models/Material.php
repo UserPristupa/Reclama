@@ -10,7 +10,7 @@ namespace App\Models;
 use App\Db;
 use App\ModelLikeTable;
 
-class Material extends ModelLikeTable 
+class Material extends ModelLikeTable
 {
     public $id;
     public $name;
@@ -22,6 +22,7 @@ class Material extends ModelLikeTable
 
     const TABLE = 'materials';
     const NAME_ID ='id';
+//    public $nameSupplier;
     public function isNew()
     {
         // TODO: Implement isNew() method.
@@ -32,8 +33,7 @@ class Material extends ModelLikeTable
             return false;
         }
     }
-
-    public static function selectForView( ){
+  public static function selectForView( ){
         //запрос заказов, клиентов, суммы оплаты с группировкой заказам
         $queryNew = "SELECT  m.id  , m.name, m.addCharacteristic, m.measure, m.deliveryForm, m.priceForMeasure, m.id_suppliers as idSupplier, s.name AS nameSupplier 
                      FROM materials AS m, suppliers AS s
@@ -63,7 +63,7 @@ class Material extends ModelLikeTable
                      ORDER BY m.name ;
                   ";
 //        GROUP BY m.name
-//        var_dump($queryNew);
+        var_dump($queryNew);
         $db = new Db();
         $sth = $db->get_dbh()->prepare($queryNew);
         $res = $sth->execute();
@@ -76,5 +76,4 @@ class Material extends ModelLikeTable
             return false;
         }
     }
-
 }

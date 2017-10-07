@@ -1,31 +1,31 @@
 <?php
 //можем здесь писать если просто вывод или пока что при подключении будет autoload.php в head.html
-require '../autoload.php';
+require_once 'autoload.php';
 ?>
 <!DOCTYPE HTML>
 <html lang="ru-RU">
 <?php
-require_once('../head.html');
+//require_once('../head.html');
 ?>
 <body>
-<div class="container">
-    <div class="row">
-        <?php require_once('header.html'); ?>
+<div class="container" id="cont">
+  <!--  <div class="row">
+        <?php //require_once('header.html'); ?>
     </div>
-    <div class="row"><!-- навигация -->
-        <?php  include('../navigation.html');?>
+    <div class="row"><!-- навигация 
+        <?php  //include('../navigation.html');?>
         <script>
             showLi('поставщики');
         </script>
     </div>
     <!--строка показа времени и показа результата добавки материала в базу  -->
-    <?php  include_once '../App/html/forDisplayTimeShowAnswerServer.html'?>
+    <?php  include_once 'App/html/forDisplayTimeShowAnswerServer.html'?>
 
     <div class="row"><!-- основной блок контета состоит из 2 колонок слева и 10 колонок справа -->
-        <div class="col-lg-2 backForDiv"> <!-- начало доп блока слева-->
+        <!--<div class="col-lg-2 backForDiv"> <!-- начало доп блока слева
             этот див слева от таблицы в нем можно расположить дополнительные кнопки добавить редактировать удалить
         </div><!-- конец доп блока слева-->
-        <div class="col-lg-10 backForDiv">
+        <div class="col-lg-12 backForDiv">
             <div class="row headingContent"><!--строка для отображения названия страницы где находится пользователь -->
                 <div class="col-lg-10   col-md-10 col-sm-10 col-xs-10   text-center "> поставщики</div>
                 <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center"></div>
@@ -54,7 +54,7 @@ require_once('../head.html');
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <?php
                     //найдем всех поставщиков и отобразим их через таблицу
-                    $allSuppliersInBase = \App\Models\Supplier::findAllOrderByName();
+                    $allSuppliersInBase = \App\Models\Supplier::findAll();
                     if(! empty ($allSuppliersInBase)){
                         $tableAllSupp = "<table id='tbViewAllSuppliers'><thead><tr><td class='tdDisplayNone'>id</td>" .
                             "<td>название</td><td>доп характ</td><td class='tdDisplayNone'>контакт</td><td>телефон</td><td class='tdDisplayNone'>email</td>" .
@@ -98,7 +98,7 @@ require_once('../head.html');
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-center">удалить поставщика навсегда!
-                        <button class="close" data-dismiss="modal">x</button>
+                        <button class="close" data-dismiss="modal">закрыть</button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">
