@@ -6,14 +6,14 @@
     <html lang="ru-RU">
 
 <?php
-        //require_once('../head.html');
+       // require_once('../head.html');
     ?>
     <body>
-    <div class="container" id="cont">
+    <div class="container">
         <!--<div class="row">
             <?php //require_once('header.html'); ?>
         </div>
-        <div class="row"><!-- навигация
+        <div class="row"><!-- навигация 
             <?php //include('../navigation.html');?>
             <script>
                 showLi('материалы');
@@ -67,7 +67,7 @@
                             $tableAllMat = "<table id ='tbViewAllMaterials'><thead><tr><td style='display: none;'>id</td><td>название</td><td>доп характ</td><td>ед изм</td><td>форма поставки</td><td>цена за ед</td><td style='display: none;'>id поставщика</td><td>поставщик</td><td><span class='glyphicon glyphicon-eye-open'></span></td><td><span class=\"glyphicon glyphicon-trash\"></span></td></tr></thead><tbody>";
                             foreach ($allMaterialsInBase as $item){
 //                                получим не false если есть этот материал хотябы в одном заказе
-                                $ifExistOrderWithIdMaterial = \App\Models\MaterialsToOrder::ifExistThisMaterialInAnyOneOrder($item[id]);
+                                $ifExistOrderWithIdMaterial = \App\Models\MaterialsToOrder::ifExistThisMaterialInAnyOneOrder(intval($item['id']));
 //                                if($ifExistOrderWithIdMaterial )
 //                                   echo "<br/> c idMaterials = $item[id] есть заказы )";
 //                                else
@@ -98,7 +98,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-center">удалить материал навсегда!
-                        <button class="close" data-dismiss="modal">закрыть</button>
+                        <button class="close" data-dismiss="modal">x</button>
                     </div>
                     <div class="modal-body">
                         <div class="container-fluid">

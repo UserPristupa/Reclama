@@ -1,6 +1,6 @@
 <?php
 //можем здесь писать если просто вывод или пока что при подключении будет autoload.php в head.html
-//require 'autoload.php';
+//require '../autoload.php';
 
 $filds_nameToView = [ 'name' =>'название заказа',
     'nameClient'=>'название клиента',
@@ -23,7 +23,7 @@ function showFromFields($idTable, $arrAll = [], $filds_nameToView){
 //            из переданного асс массива для заголовков полей получим удобочитаемые пример 'name' =>'название заказа'
             $tableAll = '';
             //теперь в строку сверстаем таблицу
-            $tableAll .= "<table id = '$idTable' , class='table-hover'>
+            $tableAll .= "<table id = '$idTable'  class='table-hov'>
             <thead><tr>
                       <td>$filds_nameToView[dateOrder]</td>
                       <td>$filds_nameToView[name]</td>
@@ -102,25 +102,25 @@ function showFromFields($idTable, $arrAll = [], $filds_nameToView){
 <title>просмотр всех заказов</title>
 <?php //include('../head.html') ?>
 <body>
-    <div class="container" id="cont">
-      <!--  <div class="row">
+    <div class="container">
+        <!--<div class="row">
             <?php //require_once('header.html');?>
         </div>
-        <div class="row"><!-- навигация 
-            <?php// include('../navigation.html');?>
+        <div class="row"><!-- навигация -->
+            <?php //include('../navigation.html');?>
            <!-- подсветка меню с контентом 'заказы'
             <script>
                 showLi('заказы');
             </script>
-        </div>
+        </div>-->
         <!--подключение строки с показом времени и результатов запросов на сервер -->
         <?php include_once ('App/html/forDisplayTimeShowAnswerServer.html'); ?>
 
         <div class="row">
-            <!--<div class="col-lg-2 backForDiv">
+           <!-- <div class="col-lg-2 backForDiv">
                 этот див слева от таблицы в нем можно расположить дополнительные кнопки добавить редактировать удалить
             </div>-->
-            <div class="col-lg-12 ">
+            <div class="col-lg-12">
                 <div class="row headingContent">
                     <div class="col-lg-10   col-md-10 col-sm-10 col-xs-10   text-center ">заказы</div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center"></div>

@@ -23,12 +23,12 @@ if(isset($_POST['sendOrderToTrash'])){
     }
 }
 //выкидывает на клиент отображение результата успешного запроса с определенным сообщением
-function showOnClientUspehWithText(string $message){
-    echo "<script>fUspehAll('$message');</script>";
+function showOnClientUspehWithText( $message){
+    echo "<script>fUspehAll(\"$message\");</script>";
 }
 //выкидывает на клиент отображение результата не успешного запроса с определенным сообщением
-function showOnClientNeUspehWithText(string $message){
-    echo "<script>fNoUspehAll('$message');</script>";
+function showOnClientNeUspehWithText( $message){
+    echo "<script>fNoUspehAll(\"$message\");</script>";
 }
 //запрос на отображение удаленных заказов
 if(isset($_POST['showTrashedOrders'])){
@@ -93,7 +93,7 @@ if(isset($_POST['showTrashedOrders'])){
     }
 
 }
-
+//поиск заказа по подобию в названию клиента
 if(isset($_POST['searchOrderForNameClient'])){
     if(isset($_POST['nameClient'])){
         $nameClientLike = htmlspecialchars($_POST['nameClient']);

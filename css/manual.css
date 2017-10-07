@@ -1,4 +1,13 @@
 ﻿@charset "utf8";
+/*.highlight{
+    background-color: #2aabd2;
+}
+.highlight2{
+    background-color: #d0d299;
+    width: 800px;
+    height: 600px;
+    overflow: auto;
+}*/
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -48,6 +57,29 @@ table {
 article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
 	display: block;
 }
+/*#navbarCollapse{
+	max-width: 250px;
+	max-height: 1300px;
+	display: flex;
+	/*background-color: green;
+	flex-direction: column;
+	margin-top: 0px;
+	position: absolute;
+}
+#main_modul{
+	max-width: 750px;
+	max-height: 1300px;
+	/*background-color: red;
+	position: relative;
+	left: 200px;
+	margin-top: 0px;
+	margin-left: 50px;
+}
+/*#row{
+	margin: 0px;
+	margin-top: 160px;
+	text-align: center;
+}*/
 .wrapper{
     /*border: #d21f12 solid 1px;*/
    /* background-color: #04B486;*/
@@ -91,28 +123,23 @@ tbody td{
 /*	top:10px;
 	left:10px;*/
     background-color: #04B486;
-	margin-left: 0px;
-    left: 0px;
-    right: 0px;
-	/*width: 1024px;*/
+	width: 1024px;
     height: 100px;
-	/*left: 367px;
-	width: 1000px;
+	/*width: 1000px;
     /*display: flex;*/
     /*justify-content: center;*/
-   /* align-items: center;
+    /*align-items: center;*/
 	/*overflow-x: visible;*/
 	z-index: 100;
    /* position: fixed !important;*/
 }
-/*
 #header > div{
 	width:100%;
 }
 #header > div:after{
 	position:fixed;
 }
-.header{
+/*.header{
 	position:relative;
 	z-index:200;
 }
@@ -128,37 +155,26 @@ tbody td{
 	content: '';
 }
 #cont{
-/*width: 840px;*/
+width: 930px;
 }
 .container {
 	/*position: relative;
 	width: 100%;
 	overflow: hidden;
 	
-    width: 930px;
-background-color: #04B486;*/
-
-    margin-left: 0px;
-    margin-right: 0px;
-
-}
-#fon{
-	/*width: 1024px;*/
-	background-color: 	#F0F0F0;
+    width: 930px;*/
+background-color: #04B486;
 }
 img{
 	float: left;
 }
 #exit {
 	/*position: absolute;*/
-	    margin-left: 850px;
+	    margin-left: 650px;
 }
 .menu_list{
 	margin-bottom: 30px;
 	/*background-color: red;*/
-}
-#main_cont{
-	margin-top:100px;
 }
 #main_modul {
 	/*padding: 0 0 0 250px;
@@ -169,16 +185,16 @@ img{
 #left-sidebar {
 	/*float: left;
 	width: 250px;*/
-	min-height: 1000px;
+	min-height: 700px;
 	/*margin-left: -15px;
 	position: relative;
 	/*background: #04B486;*/
-	background-image: linear-gradient(to left,#228B22 0,#04B486 100%);
+	background-color: #04B486;
 	/*text-align: justify;
 	padding-left: 20px;
     z-index:99;*/	
 }
-#left-sidebar span{
+.left-sidebar span{
 	display: inline-block;
 	width: 25px;
 	text-align: right;
@@ -188,14 +204,6 @@ img{
 .img-sm {
     width: 36px!important;
     height: 36px!important;
-}
-.vcenter {
-  display: inline-block;
-  float: none;
-  vertical-align: middle;
-}
-.profile{
-	margin-left: 50px;
 }
 /*.header img{
     height: 100px !important;
@@ -267,28 +275,18 @@ margin:10px;
 	content: "\ead0";
 	width:15px;
 	height:15px;
-	/*margin-right: 10px;*/
 }
 .icon-vcard:before{
 	font-family: 'icomoon';
 	content: "\eb47";
 	width:15px;
 	height:15px;
-	/*margin-right:10px*/
 }
 .fa-shopping-basket:before{
 	font: normal normal normal 14px/1 FontAwesome;
 	content: "\f291";
 	width:20px;
 	height:20px;
-	
-}
-.fa-cart-arrow-down:before{
-	font: normal normal normal 14px/1 FontAwesome;
-	content: "\f218";
-	width:20px;
-	height:20px;
-	
 }
 .icon-home3:before{
 	font-family: 'icomoon';
@@ -301,14 +299,12 @@ margin:10px;
 	content: "\ec1b";
 	width:20px;
 	height:20px;
-	
 }
 .icon-truck{
 	font-family: 'icomoon';
 	content: "\e0ab";
 	width:20px;
 	height:20px;
-	
 }
 .fa-user:before{
 	/*font-family: 'fontawesome';*/
@@ -316,7 +312,6 @@ margin:10px;
 	content: "\f007";
 	width:15;
 	height:15;
-	
 }
 .fa-bar-chart:before{
 	/*font-family: 'fontawesome';*/
@@ -324,21 +319,18 @@ margin:10px;
 	content: "\f080";
 	width:15px;
 	height:15px;
-	
 }
 .fa-check-square-o{
 	font: normal normal normal 14px/1 FontAwesome;
 	content: "\f1fd";
 	width:15px;
-	height:15px;
-    	
+	height:15px;	
 }
 .fa-birthday-cake {
     font: normal normal normal 14px/1 FontAwesome;
 	content: "\f080";
 	width:15px;
 	height:15px;
-	
 }	
 .fa-key{
 	font: normal normal normal 14px/1 FontAwesome;
@@ -753,9 +745,3 @@ table {
 .facebook { background-color:#354E84;color:#fff; }
 .twitter { background-color:#00A5E3;color:#fff; }
 .facebook:hover,.twitter:hover { color:#fff; }
-/*#logo{
-	background-image:url('http://recl/img/4_Grayscale_logo_on_transparent_291x67.png'); 
-    width:270px; 
-    height:67px; 
-    background-position:left;
-}*/
