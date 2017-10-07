@@ -1,6 +1,6 @@
 <?php
 //можем здесь писать если просто вывод или пока что при подключении будет autoload.php в head.html
-require_once '../autoload.php';
+//require_once '../autoload.php';
 ?>
 <!DOCTYPE HTML>
 <html lang="ru-RU">
@@ -9,7 +9,7 @@ require_once '../autoload.php';
 //     include_once ('E:\OpenServer\domains\reclama\head.html');
 //     include_once ("$_SERVER[DOCUMENT_ROOT]/head.html");
 
-   include_once('../head.html');
+  // include_once('../head.html');
 ?>
 <body>
 <div class="container">

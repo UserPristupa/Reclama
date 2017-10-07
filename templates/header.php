@@ -16,6 +16,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="row" id="container">
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3" id="logo">
+				<div id="logo"><img src="\img\1_Primary_logo_on_transparent_346x63.png"/></div>
 					<!--<img src='/img/Acc-logo200-120.jpg'
 						 alt="imgLogo" class="img-rounded img-responsive text-right">-->
 				</div>
@@ -24,7 +25,14 @@
 				   <!-- <img src="/img/viveska2.jpg"
 						 alt="nameFirma" class="img-rounded img-responsive text-left">
 						 <img src="./img/vihod.png" align= "absmiddle" vspace="10" hspace="5" />-->
-						 <div id="logo"><img src="\img\4_Grayscale_logo_on_transparent_291x67.png"/></div>
+						<span class="fa-user" style="margin-left: 100px;">
+							<?
+								require_once 'autoload.php';
+								$sid=session_id();
+								$res=\App\Models\User::getCurrentUserBySession($sid);
+								echo $res[0]->name;
+							?>
+						  </span>
 						<a id="exit"><i class="icon-exit3"></i>Выход</a></div>	
 				<div id="completed_successfully" style="display:none">Успешно завершено</div>
 			</div>

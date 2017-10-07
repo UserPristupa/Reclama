@@ -1,5 +1,5 @@
 <?php
-//require '../autoload.php';
+//require_once 'autoload.php';
 ////       echo get_called_class();
 ////        echo Нужно отметить, что для большего удобства в PHP кроме слова «static» есть еще специальная функция get_called_class(), которая сообщит вам — в контексте какого класса в данный момент работает ваш код.
 ?>
@@ -24,7 +24,7 @@
                 </script>
 
             </div>
-            <!-- конец навигации -->
+            <!-- конец навигации 
         </div>-->
         <!--строка показа времени и показа результата добавки материала в базу  -->
         <?php  include_once 'App/html/forDisplayTimeShowAnswerServer.html'?>

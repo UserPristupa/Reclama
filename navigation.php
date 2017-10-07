@@ -23,17 +23,15 @@
 		<i class="icon-copy-2"></i>-->
 		<!--<i class="box-add"></i>-->
 		<div class="menu_list">
-		<span style="margin-left: 20px">
 		<span class="fa-user">
+		</span>
 		<?
 			require_once 'autoload.php';
 			$sid=session_id();
 			$res=\App\Models\User::getCurrentUserBySession($sid);
-			echo $res[0]->login;
+			echo $res[0]->name;
 		?>
-		</span>
-		</span>
-		<a><span class="glyphicon glyphicon-cog btn-lg" style="margin-left: 100px"></span>
+		<a><span class="glyphicon glyphicon-cog btn-lg" style="float: right;" id="profile"></span>
 		<!--<img src="./img/Настройки.png" align="right" widht="30"  height="30" hspace="10" vspace="10" id="profile"/>-->
 		</a>
 
@@ -120,7 +118,8 @@
 	    xhr.overrideMimeType("text/plain; charset=utf8");
         xhr.send(null);
 		document.getElementById("main_modul").innerHTML = xhr.responseText;
-		document.getElementById("name_profile").value='<?echo $res[0]->login;?>';
+		document.getElementById("name_profile").value='<?echo $res[0]->name;?>';
+		document.getElementById("email_profile").value='<?echo $res[0]->email;?>';
 		//document.onkeyup = function(e)
 		//{
 		//	e = e || window.event;
