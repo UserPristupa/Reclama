@@ -9,11 +9,11 @@
 </div>
 <div class="input-group">
 <span class="input-group-addon"><span class="icon-phone2"></span></span>
-<input type="password" class="form-control" placeholder="Телефон" required name="password"/>
+<input type="text" class="form-control" placeholder="Телефон" required name="phone"/>
 </div>
 <div class="input-group">
-<span class="input-group-addon"><span class="fa fa-birthday-cake"></span></span>
-<input type="password" class="form-control" placeholder="День рождения" required name="password"/>
+<span class="input-group-addon"><span class="glyphicon glyphicon-envelope"></span></span>
+<input type="text" class="form-control" placeholder="Email" required name="email" id="email_profile"/>
 </div>
 <div class="input-group">
 <span class="input-group-addon"><span class="fa-key"></span></span>
@@ -23,10 +23,7 @@
 <span class="input-group-addon"><span class="fa-key"></span></span>
 <input type="password" class="form-control" placeholder="Повтор пароль" required name="password"/>
 </div>
-<!--<p>
-<a href="#">Забыли свой пароль?</a></p>
-У вас нет аккаунта? <a href="#">Регистрация</a>
--->
+<button type="button" class="btn btn-success">Сохранить</button>
 </form>
 </div>
 </div>

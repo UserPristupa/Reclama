@@ -1,6 +1,6 @@
 <?
 session_start();
-include "templates/checkSession.php";
+include "handlers/checkSession.php";
 $res=check_session();
 if($res=='unauthorized')
 {
@@ -36,20 +36,19 @@ else
 <!--</head>-->
 <?php
       require_once ('./head.php');
-//так работает
-//   require_once ("$_SERVER[DOCUMENT_ROOT]/head.php");
 ?>
 <body>
 
 <div class="container">
     <div class="row navbar navbar-inverse navbar-fixed-top" id="header">
-        <!--   wrapper      подтянем header сайта если мы его помещаем в контейнер, то навигация становится на всю ширину-->
+        <!--   wrapper      подтянем header сайта-->
         <!-- относительно точки	<div class="col-lg-2">-->
         <?php require_once ('./templates/header.php'); ?>
 		
 	</div>
 	<div class="row" id="main_cont"><!-- middle  -->
-        <!--    подтянем menu сайта почему оно идет по всей ширире ? по идее это все в контейнере должно быть на ширину рисунка header.php-->
+	<!--<?echo password_hash ( "password2" , PASSWORD_BCRYPT);?>-->
+        <!--    подтянем menu сайта-->
         <?php require_once ('./navigation.php'); ?>
      <!--<div class="footer">
             <div> статус: admin/user<br>имя пользователя/ник</div>      

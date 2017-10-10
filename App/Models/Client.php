@@ -8,7 +8,7 @@
 
 namespace App\Models;
 use App\Db;
-use App\FastViewTable;
+//use App\FastViewTable;
 use App\ModelLikeTable;
 
 
@@ -22,7 +22,7 @@ class Client extends ModelLikeTable
     public $contactPerson;//имя контактного лица
     public $address;
 
-    use FastViewTable;
+    //use FastViewTable;
     
     const TABLE = 'clients';
     const NAME_ID ='id';

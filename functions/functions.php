@@ -8,12 +8,6 @@ function activate (id/*,handler*/) {
 	    document.getElementById(selectedId).style.fontWeight='normal';
 	}
 	selectedId=id;
-/*	if(handler==="")
-	{
-		document.getElementById("main_modul").innerHTML="";
-		return;
-	}
-*/
 	var element=document.getElementById(id);
 	var parent=element.parentElement;
 	var children = parent.children;
@@ -32,44 +26,19 @@ function activate (id/*,handler*/) {
 		var child=elementChildren[i];
 		child.style.display="block";
 	}
-/*	var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", "/templates/checkSession.php", false ); // false for synchronous request
-	xmlHttp.overrideMimeType("text/plain; charset=utf8");
-    xmlHttp.send( null );
-    if(xmlHttp.responseText=="authorized")
-	{
-	    var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open( "GET", handler, false ); // false for synchronous request
-	    xmlHttp.overrideMimeType("text/plain; charset=utf8");
-        xmlHttp.send( null );
-        var main_module=document.getElementById("main_modul");
-		main_module.innerHTML=xmlHttp.responseText;
-		var myScripts = main_module.getElementsByTagName("script");
-        if (myScripts.length > 0) {
-            eval(myScripts[0].innerHTML);
-        }
-	}
-	else if(xmlHttp.responseText=="unauthorized")
-    {
-	    window.location="/authorization.php"
-    }
-	else 
-	{
-	    document.getElementById("main_modul").innerHTML=xmlHttp.responseText;
-	}
-	*/
 }
 </script>
 <?
+//загрузка меню из базы
     function get_menu(){
-		$mysql_host = 'localhost';
+		$config = include (__DIR__.'/../config.php');
+		$mysql_host = $config['host'];
         // MySQL username
-        $mysql_username = 'root';
-		$mysql_database = 'reclama';
-		$mysql_password = NULL;
+        $mysql_username = $config['user'];
+		$mysql_database = $config['dbname'];
+		$mysql_password = $config['password'];
 		$sql="SELECT * FROM menu";
 		$mysqli = mysqli_connect($mysql_host, $mysql_username,$mysql_password,$mysql_database);
-//		mysql_select_db($mysql_database);
 		$result = mysqli_query($mysqli,$sql);
 		if(!$result) {
 			return NULL;
@@ -93,7 +62,6 @@ function activate (id/*,handler*/) {
 		$padding=7*$level;
 		$hidden=' style="padding-left:'.$padding.'px"';
 		$show_parents=false;
-//		echo $_GET['menu'];
 		if($parent_id>0&&$hide){
 			$hidden=' style="display:none; padding-left:'.$padding.'px"';	
 		}
@@ -103,13 +71,6 @@ function activate (id/*,handler*/) {
 		
 		for($i = 0; $i < count($arr[$parent_id]);$i++) {
 			$id=$parent_id . "sub" . $i;
-			
-	//		echo '</img>';
-	//		echo '<li id="'.$id.'"><div><a  name="'.$arr[$parent_id][$i]['handler'].'" onclick="activate(\''.$id.'\',\''.$arr[$parent_id][$i]['handler'].'\')">';
-	//		echo '<img src="'.$arr[$parent_id][$i]['image'].'" height="15" width="15" align="absmiddle">'.$arr[$parent_id][$i]['title'].'</img></a></div>';
-	//        echo '<li id="'.$id.'" style="background: url('.$arr[$parent_id][$i]['image'].') no-repeat top; height: 15px; padding-left: 50px; padding-top: 50px; width: 15px;"><a  name="'.$arr[$parent_id][$i]['handler'].'" onclick="activate(\''.$id.'\',\''.$arr[$parent_id][$i]['handler'].'\')">';
-	//		echo $arr[$parent_id][$i]['title'].'</a>';
-	//
 	$bold="";
 	if($id==$_GET['menu'])
 	{
@@ -126,8 +87,7 @@ function activate (id/*,handler*/) {
 			{
 				$show_parents=view_menu($arr,$arr[$parent_id][$i]['id'],true,$level+1);
 			}
-			echo "</li>\n";
-			
+			echo "</li>\n";			
 		}
 		echo "</ul>\n";
 		if($show_parents)
@@ -139,11 +99,12 @@ function activate (id/*,handler*/) {
 		return $show_parents;
 	}
 	function get_handler_by_menu_title($title){
-		$mysql_host = 'localhost';
+		$config = include (__DIR__.'/../config.php');
+		$mysql_host = $config['host'];
         // MySQL username
-        $mysql_username = 'root';
-		$mysql_database = 'reclama';
-		$mysql_password = NULL;
+        $mysql_username = $config['user'];
+		$mysql_database = $config['dbname'];
+		$mysql_password = $config['password'];
 		$sql="SELECT handler FROM menu WHERE title=".$title.";";
 		$mysqli = mysqli_connect($mysql_host, $mysql_username,$mysql_password,$mysql_database);
 //		mysql_select_db($mysql_database);
@@ -152,9 +113,6 @@ function activate (id/*,handler*/) {
 			return NULL;
 		}
 	    $row = mysqli_fetch_row($result);
-
-		//return($row['handler']);
-		//return $sql;
 		return $row[0];
 	}
 ?>
