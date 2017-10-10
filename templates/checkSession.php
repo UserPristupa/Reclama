@@ -1,5 +1,6 @@
 <?
 require_once 'autoload.php';
+//use App\Models\User;
 function check_session()
 {
 	$sid=session_id();

@@ -1,5 +1,6 @@
 <?
 session_start();
+require 'autoload.php';
 include "handlers/checkSession.php";
 $res=check_session();
 if($res=='unauthorized')
@@ -48,6 +49,7 @@ else
 	</div>
 	<div class="row" id="main_cont"><!-- middle  -->
 	<!--<?echo password_hash ( "password2" , PASSWORD_BCRYPT);?>-->
+	
         <!--    подтянем menu сайта-->
         <?php require_once ('./navigation.php'); ?>
      <!--<div class="footer">

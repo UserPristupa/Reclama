@@ -149,6 +149,16 @@ function showFromFields($idTable, $arrAll = [], $filds_nameToView){
                         <label for="makeNewOrder"  class="text-center">новый заказ</label>
                         <div title="создать новый заказ" id="makeNewOrder"></div>
                         <a href='formAddNewOrder.php'> <div class="text-center"> <span class='glyphicon glyphicon-plus'></span></div></a>
+                        <a id="aOnclick"> <div class="text-center"> <span class='glyphicon glyphicon-plus'></span></div></a>
+                    <script type="text/javascript">
+                        $('#aOnclick').on('click',includeFormAddNewOrder);
+                        function includeFormAddNewOrder() {
+ //                           jquery_send('#main_modul','post','/templates/controllerViewAllOrders.php',['includeFormNewOrder'],['']);
+//event.stopPropagation();
+                            document.getElementById("#main_modul").innerHTML= '<? echo  include ('formAddNewOrder.php');?>';
+                            return false;
+                        }
+                    </script>
                     </div>
                 </div><!-- конец блока строки поиска  -->
                 <div class="row backForDiv divForTable"><!-- строка показа в таблице заказов-->
@@ -169,8 +179,8 @@ function showFromFields($idTable, $arrAll = [], $filds_nameToView){
             </div>
         </div>
         <!-- подключение модального окна которое будет всплывать при нажатии кнопки удалить-->
-        <?php include_once ('App/html/viewAllOrdersModal.html');?>
-        <script src = 'js/viewAllOrders.js'></script>
+        <?php include_once ('../App/html/viewAllOrdersModal.html');?>
+        <script src = '/js/viewAllOrders.js'></script>
     </div><!-- container -->
 </body>
 </html>

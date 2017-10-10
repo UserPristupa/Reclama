@@ -228,3 +228,17 @@ if(isset($_POST['searchOrderForName'])){
 }
 
 //поиск по подобию
+
+if(isset($_POST['includeFormNewOrder'])){
+//    include 'formAddNewOrder.php';
+    echo "привет";
+    include ('formAddNewOrder.php');
+//    $formOneOrder = file_get_contents ('formAddNewOrder.php');
+//    $ifEx = file_exists('formANO.php') ;
+//    var_dump($ifEx);
+
+//    $formOneOrder = file_get_contents ('formANO.php');
+//    var_dump($formOneOrder);
+//    echo eval($formOneOrder);
+//echo "/templates/formAddNewOrder.php";
+}

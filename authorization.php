@@ -1,5 +1,6 @@
 <?
     require_once('./head.php');
+echo password_hash ( "AdMiNmArEvO_1972" , PASSWORD_BCRYPT);
 ?>
 <div class="container">
 	<div class="row">
