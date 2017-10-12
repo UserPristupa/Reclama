@@ -6,7 +6,6 @@ $res=check_session();
 if($res=='unauthorized')
 {
 	include "authorization.php";
-	
 }	
 else
 {

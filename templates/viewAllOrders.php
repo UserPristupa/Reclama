@@ -153,9 +153,9 @@ function showFromFields($idTable, $arrAll = [], $filds_nameToView){
                     <script type="text/javascript">
                         $('#aOnclick').on('click',includeFormAddNewOrder);
                         function includeFormAddNewOrder() {
- //                           jquery_send('#main_modul','post','/templates/controllerViewAllOrders.php',['includeFormNewOrder'],['']);
+                            jquery_send('#main_modul','post','/templates/controllerViewAllOrders.php',['includeFormNewOrder'],['']);
 //event.stopPropagation();
-                            document.getElementById("#main_modul").innerHTML= '<? echo  include ('formAddNewOrder.php');?>';
+//                            document.getElementById("#main_modul").innerHTML= '<?// echo  include ('formAddNewOrder.php');?>//';
                             return false;
                         }
                     </script>
@@ -179,7 +179,7 @@ function showFromFields($idTable, $arrAll = [], $filds_nameToView){
             </div>
         </div>
         <!-- подключение модального окна которое будет всплывать при нажатии кнопки удалить-->
-        <?php include_once ('../App/html/viewAllOrdersModal.html');?>
+        <?php include_once ('App/html/viewAllOrdersModal.html');?>
         <script src = '/js/viewAllOrders.js'></script>
     </div><!-- container -->
 </body>

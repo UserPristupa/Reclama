@@ -60,7 +60,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
     /*border: #d0d299 solid 1px;*/
 }
 .divForTable {
-    overflow-y: auto;
+    /*overflow-y: auto;*/
     /*width: 100%;*/
 }
 table{
@@ -370,8 +370,8 @@ margin:10px;
 }
 /* класс позволяет ограничить размер высоты и ширины таблицы для удобства просмотра таблиц что имеют большую ширину и высоту*/
 .divForTable {
-    overflow: auto;
-   max-height:400px;
+    /*overflow: auto;*/
+   /*max-height:400px;*/
     /*width: 100%;*/
 }
 .divForTable div{

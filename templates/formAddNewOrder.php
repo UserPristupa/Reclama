@@ -108,10 +108,14 @@ showLi('создать заказ')
                                     <td><input type="date"  name="dateOfOrdering" required/></td></tr>
 <script>
 //установить максимальную дату сегодня
-document.addEventListener('DOMContentLoaded', function() {
+$(function () {
     $('input[name = "dateOfOrdering"]').val(getDate());
     $('input[name = "dateOfComplation"]').val(datePlusDays(14));
 });
+//document.addEventListener('DOMContentLoaded', function() {
+//    $('input[name = "dateOfOrdering"]').val(getDate());
+//    $('input[name = "dateOfComplation"]').val(datePlusDays(14));
+//});
 </script>
                                 <tr>
                                     <td><label for="dateOfComplation">дата закрытия заказа</label></td>
