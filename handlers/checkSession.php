@@ -1,9 +1,11 @@
 <?
+require_once 'autoload.php';
+//use App\Models\User;
 function check_session()
 {
 	$sid=session_id();
     $res=\App\Models\User::getCurrentUserBySession($sid);
-	if($res && time()-$res[0]->updated<18000)
+	if($res && time()-$res[0]->updated<1800)
 	{
 		
 		$updated=\App\Models\User::createSession($res[0]->login);

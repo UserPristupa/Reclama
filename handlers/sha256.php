@@ -8,7 +8,6 @@
 //	file_put_contents("reclama_debug.log",$_POST["sql"]);
     
 }
-hash_file - функция для генерация хеш-значения, используя содержимое заданного файла(контрольная сумма)
 */
    
    echo hash_file("sha256",$_FILES['file']['tmp_name']);
