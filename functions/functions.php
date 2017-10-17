@@ -29,14 +29,12 @@ function activate (id/*,handler*/) {
 }
 </script>
 <?
-//загрузка меню из базы
     function get_menu(){
-		$config = include (__DIR__.'/../config.php');
-		$mysql_host = $config['host'];
+		$mysql_host = 'localhost';
         // MySQL username
-        $mysql_username = $config['user'];
-		$mysql_database = $config['dbname'];
-		$mysql_password = $config['password'];
+        $mysql_username = 'root';
+		$mysql_database = 'reclama';
+		$mysql_password = NULL;
 		$sql="SELECT * FROM menu";
 		$mysqli = mysqli_connect($mysql_host, $mysql_username,$mysql_password,$mysql_database);
 		$result = mysqli_query($mysqli,$sql);
@@ -55,11 +53,12 @@ function activate (id/*,handler*/) {
 			return $arr_cat;
 		}
 	}
+	//отображение меню
 	function view_menu($arr,$parent_id = 0,$hide = true,$level=0) {
 		if(empty($arr[$parent_id])) {
 			return;
 		}
-		$padding=7*$level;
+		$padding=15*$level;
 		$hidden=' style="padding-left:'.$padding.'px"';
 		$show_parents=false;
 		if($parent_id>0&&$hide){
@@ -76,7 +75,7 @@ function activate (id/*,handler*/) {
 	{
 		$bold=" style='font-weight:bold'";
 	}
-	echo "<li id='".$id."'".$bold."><a  href=index.php?page='".$arr[$parent_id][$i]['title']."'&menu=".$id.">\n"; // onclick="activate(\''.$id.'\')"
+	echo "<li id='".$id."'".$bold."><a  href=index.php?page=".$arr[$parent_id][$i]['title']."&menu=".$id.">\n"; // onclick="activate(\''.$id.'\')"
 	echo "<span class='".$arr[$parent_id][$i]['image']."' ></span>".$arr[$parent_id][$i]['title']."</a>\n";
 			if($id==$_GET['menu'])
 			{
@@ -87,7 +86,8 @@ function activate (id/*,handler*/) {
 			{
 				$show_parents=view_menu($arr,$arr[$parent_id][$i]['id'],true,$level+1);
 			}
-			echo "</li>\n";			
+			echo "</li>\n";
+			
 		}
 		echo "</ul>\n";
 		if($show_parents)
@@ -99,13 +99,12 @@ function activate (id/*,handler*/) {
 		return $show_parents;
 	}
 	function get_handler_by_menu_title($title){
-		$config = include (__DIR__.'/../config.php');
-		$mysql_host = $config['host'];
+		$mysql_host = 'localhost';
         // MySQL username
-        $mysql_username = $config['user'];
-		$mysql_database = $config['dbname'];
-		$mysql_password = $config['password'];
-		$sql="SELECT handler FROM menu WHERE title=".$title.";";
+        $mysql_username = 'root';
+		$mysql_database = 'reclama';
+		$mysql_password = NULL;
+		$sql="SELECT handler FROM menu WHERE title='".$title."';";
 		$mysqli = mysqli_connect($mysql_host, $mysql_username,$mysql_password,$mysql_database);
 //		mysql_select_db($mysql_database);
 		$result = mysqli_query($mysqli,$sql);
@@ -113,6 +112,9 @@ function activate (id/*,handler*/) {
 			return NULL;
 		}
 	    $row = mysqli_fetch_row($result);
+
+		//return($row['handler']);
+		//return $sql;
 		return $row[0];
 	}
 ?>

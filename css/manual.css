@@ -49,19 +49,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, 
 	display: block;
 }
 .wrapper{
-    /*border: #d21f12 solid 1px;*/
-   /* background-color: #04B486;*/
-	/*min-width: 200px;
-	max-width: 1024px;0*/
 	margin: 0 auto;
-}
-.backForDiv{
-    /*background-color: #2aabd2;*/
-    /*border: #d0d299 solid 1px;*/
-}
-.divForTable {
-    /*overflow-y: auto;*/
-    /*width: 100%;*/
 }
 table{
     /*table-layout: fixed;*/
@@ -71,7 +59,6 @@ table{
 thead td {
     background-color: #efefef;
     padding: 10px;
-    /*text-align: start;*/
 }
 
 tbody td{
@@ -84,43 +71,15 @@ tbody td{
 	   color: white;
    }
 #header{
-   /* margin: auto;
-    line-height: 6rem;*/
-    /*border-radius: 1em;
-	position: absolute;*/
-/*	top:10px;
-	left:10px;*/
     background-color: #04B486;
 	margin-left: 0px;
     left: 0px;
     right: 0px;
-	/*width: 1024px;*/
     height: 100px;
-	/*left: 367px;
-	width: 1000px;
-    /*display: flex;*/
-    /*justify-content: center;*/
-   /* align-items: center;
-	/*overflow-x: visible;*/
 	z-index: 100;
-   /* position: fixed !important;*/
 }
-/*
-#header > div{
-	width:100%;
-}
-#header > div:after{
-	position:fixed;
-}
-.header{
-	position:relative;
-	z-index:200;
-}
-*/
-.middle {
-	/*width: 100%;
-	position: relative;
-	top: 100px;*/
+#pod{
+	/*margin-top: 20px;*/
 }
 .middle:after {
 	display: table;
@@ -131,53 +90,36 @@ tbody td{
 /*width: 840px;*/
 }
 .container {
-	/*position: relative;
-	width: 100%;
-	overflow: hidden;
-	
-    width: 930px;
-background-color: #04B486;*/
-
     margin-left: 0px;
     margin-right: 0px;
-
 }
 #fon{
-	/*width: 1024px;*/
 	background-color: 	#F0F0F0;
 }
 img{
 	float: left;
 }
 #exit {
-	/*position: absolute;*/
-	    margin-left: 800px;
-		float: right;
+	margin-left: 800px;
+	float: right;
 }
 .menu_list{
 	margin-bottom: 30px;
-	/*background-color: red;*/
 }
 #main_cont{
 	margin-top:100px;
 }
 #main_modul {
-	/*padding: 0 0 0 250px;
-	overflow: scroll;*/
+	margin-left: 230px;
 }
 /* Left Sidebar
 -----------------------------------------------------------------------------*/
 #left-sidebar {
-	/*float: left;
-	width: 250px;*/
-	min-height: 1000px;
-	/*margin-left: -15px;
-	position: relative;
-	/*background: #04B486;*/
-	background-image: linear-gradient(to right,#038A67 0,#04B486 100%);
-	/*text-align: justify;
-	padding-left: 20px;
-    z-index:99;*/	
+	font: 18px/24px Arial, sans-serif;
+	max-width: 230px;
+	min-height: 1200px;
+	margin-top: 100px;
+	background-image: linear-gradient(to right,#038A67 0,#04B486 100%);	
 }
 #left-sidebar span{
 	display: inline-block;
@@ -202,42 +144,8 @@ ul#menu_list li{
 margin-top: 20px;
 margin-bottom: 20px;
 }
-
-/*.header img{
-    height: 100px !important;
-    display: block;
-    /*padding-left: 30%;
-}
-.header span{
-    display: block;
-    margin-top: 2.2rem;
-    padding-top: -1rem;
-    font-size: 4.3rem;
-    background-color: #ffb335;
-}
-.header + div{
-    margin: 5px;
-    padding: 10px;
-    max-width: 250px;
-    border-radius: 4em;
-    background-color:#d7d7c8;
-}
-
-.nav li a{
-    /*border-radius:2em;*/
-}
-.header li{
-    /*border-radius: 2rem;*/
-    /*background-color:#8bc34a;*/
-}
 body{
-    /*background-color: ghostwhite;*/
 	font: 14px/20px Arial, sans-serif;
-    /*background-color: #99ccd2;*/
-    /*width: 1024px;*/
-   
-    /*overflow: auto;*/
-    /*padding:20px; */
 }
 .contentpaneopen img {
 margin:10px;
@@ -759,9 +667,6 @@ table {
 .facebook { background-color:#354E84;color:#fff; }
 .twitter { background-color:#00A5E3;color:#fff; }
 .facebook:hover,.twitter:hover { color:#fff; }
-/*#logo{
-	background-image:url('http://recl/img/4_Grayscale_logo_on_transparent_291x67.png'); 
-    width:270px; 
-    height:67px; 
-    background-position:left;
-}*/
+#logo{
+	margin-top:10px;
+}

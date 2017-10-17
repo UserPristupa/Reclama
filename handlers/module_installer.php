@@ -9,7 +9,6 @@
     
 }
 */
-   $config = include (__DIR__.'/../config.php');
    $zip = new ZipArchive;
    if ($zip->open($_FILES['file']['tmp_name']) === TRUE) {
     $zip->extractTo('../tmp');
@@ -25,13 +24,13 @@
 				
 				$filename=trim($params[1]);
                 // MySQL host
-                $mysql_host = $config['host'];
+                $mysql_host = 'localhost';
                 // MySQL username
-                $mysql_username = $config['user'];
+                $mysql_username = 'root';
                 // MySQL password
-                $mysql_password = $config['password'];
+                $mysql_password = NULL;
                 // Database name
-                $mysql_database = $config['dbname'];
+                $mysql_database = 'reclama';
 
                 // Connect to MySQL server
                 $mysqli = mysqli_connect($mysql_host, $mysql_username,$mysql_password,$mysql_database) or file_put_contents("reclama_debug.log",'Error connecting to MySQL server: ' . mysql_error());
@@ -66,8 +65,17 @@
 			{
 				$dirname=trim($params[1]);
 				$module_root="../modules/" . $dirname;
-				rename($dirname,"../modules/" . $filename);
+				mkdir($module_root);
 				//copy("installer.ins",$module_root."/installer.ins");
+			}
+			else if($params[0]=='NAME')
+			{
+				copy("installer.ins","../modules/" . $params[1]);
+			}
+			else 
+			{
+				$filename=trim($params[1]);
+				rename($filename,"../modules/" . $filename);
 			}
         }
         fclose($handle);
