@@ -213,26 +213,65 @@ function testOnEmail(email){
     return regExpEmail.test(email);
 }
 //на загрузку document повесим вызов времени с сервера
+//определим переменную которая будет содержать время сервера
+var dateFromServer ='';
+var countTimeOnThisPage = 0 ;
+var coutnReqGetTimeFromServer = 0;
+var $elemForDislayTimeFromServer = $('.nav.navbar-nav li:last-child a');
+var intervalForClear;
+function getTimeFromServer() {
+    $.ajax({
+        type: 'post',
+        url: '/timeZone.php',
+        data: 'getTimeServer',
+        success: function(data){
+            coutnReqGetTimeFromServer++;
+            // console.log('вызов № '+coutnReqGetTimeFromServer);
+            // console.log('getTimeFromServer()='+data);
+            dateFromServer = data;
+            $elemForDislayTimeFromServer.html(dateFromServer);
+        }
+    });
+}
+function showInDomElement(elem) {
+    return function () {
+        //заполним новым значением  даты сервера переменную dateFromServer
+        getTimeFromServer();
+        elem.html(dateFromServer);
+        $('#rezShow').text('вы на сайте '+ ++countTimeOnThisPage + ' минут');
+        // console.log(' вы сидите на этой странице уже '+ countTimeOnThisPage++ +' sec');
+        clearInterval(intervalForClear);
+    }
+    }
 $(function () {
-    (function () {
-        $.ajax({
-            type: 'post',
-            url: '/timeZone.php',
-            data: 'getTimeServer',
-            success: function(data){
-                $('.nav.navbar-nav li:last-child a').html(data);
-            }
-        });
-    })();
-    setInterval(function () {
-        $.ajax({
-            type: 'post',
-            url: '/timeZone.php',
-            data: 'getTimeServer',
-            success: function(data){
-                $('.nav.navbar-nav li:last-child a').html(data);
-            }
-        })
-    }, 1000*60);
-
+    //запросим даныые о времени через ajax и запишем их в dateFromServer
+    getTimeFromServer();
+    //отобразим dateFromServer на элементе $elemForDislayTimeFromServer
+    $elemForDislayTimeFromServer.html(dateFromServer);
+    //запустим это функцию запроса времени и отображения на элементе раз в минуту
+    intervalForClear = setInterval(showInDomElement($elemForDislayTimeFromServer),1000*60);
 });
+//на загрузку document повесим вызов времени с сервера
+// $(function () {
+//     (function () {
+//         $.ajax({
+//             type: 'post',
+//             url: '/timeZone.php',
+//             data: 'getTimeServer',
+//             success: function(data){
+//                 $('.nav.navbar-nav li:last-child a').html(data);
+//             }
+//         });
+//     })();
+//     setInterval(function () {
+//         $.ajax({
+//             type: 'post',
+//             url: '/timeZone.php',
+//             data: 'getTimeServer',
+//             success: function(data){
+//                 $('.nav.navbar-nav li:last-child a').html(data);
+//             }
+//         })
+//     }, 1000*60);
+//
+// });

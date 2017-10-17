@@ -23,7 +23,7 @@ $('#modalAddMaterialToOrder').on('click',function (event) {
             /** работаем здесь*/
             if(countTrue) {
                 console.log('send to server id= '+idOr +' idMat= '+idMat + ' count= '+count);
-                jquery_send('#rezZaprosAddCountMaterial','post','controllerOneOrder.php',
+                jquery_send('.divForAnswerServer','post','../controllerOneOrder.php',
                     ['addCountMaterialToOrder', 'idMaterial', 'idOrder','countMaterial'],
                     ['',idMat,idOr,count]
                 );
@@ -44,7 +44,7 @@ $('#modalAddMaterialToOrder').on('show.bs.modal',function () {
     $('#modalViewAllMaterialsToThisOrder').modal('hide');
   //*** вызвать функцию ниже
     getAllMaterialsFromBase();
-    //повесим фунцию позаза усеха не успеха обращений на сервер (запросы на изменение)
+    //повесим фунцию показа усеха не успеха обращений на сервер (запросы на изменение)
     herePokazRezZapros($('#rezShowFormAddMaterialToOrder'));
     $('[name = "buttonSearchNameMaterial"]').on('click',serchAllMaterialsForName);
     $('#tbSearchMaterialOnName').on('input',function () {
@@ -61,7 +61,7 @@ $('#modalAddMaterialToOrder').on('show.bs.modal',function () {
 });
 //запрос всех материалов и з базы
 function getAllMaterialsFromBase() {
-    jquery_send('#tableFildMaterialToAddToOrder','post','controllerOneOrder.php',
+    jquery_send('#tableFildMaterialToAddToOrder','post','../controllerOneOrder.php',
     ['getAllMaterialsFromBase','idOrder'],
     ['', ORDER.id]    
     );
@@ -71,10 +71,29 @@ function serchAllMaterialsForName() {
     var nameMater = $.trim($('#idInputNameMaterial').val());
     if(nameMater != ""){
         console.log('посылаем вызов в базу с nameMater:'+nameMater);
-        jquery_send('#tbSearchMaterialOnName','post','controllerOneOrder.php',
+        jquery_send('#tbSearchMaterialOnName','post','../controllerOneOrder.php',
             ['searchMaterialsForName','nameMaterialLike'],['',nameMater]
         );
     }
     return false;
 }
 
+//двойной клик на таблице всех материалов в базе что будут показаны в #tableFildMaterialToAddToOrder
+$('#tableFildMaterialToAddToOrder').on('dblclick',function (event) {
+    var target = event.target;
+   console.log('двойной клик в таблице в строке');
+    //найдем строку в которой был двойной клик
+    while (target.nodeName != 'TBODY'){
+        if(target.nodeName == 'TR'){
+            console.log('поймали двойной клик в строке с id материала '+$(target).children()[0].textContent);
+            var idMaterToAddForOrder = $(target).children()[0].textContent;
+            var nameMaterToAddForOrder = $(target).children()[1].textContent;
+            $('#modalAddMaterialToOrderFastIdMat').text(idMaterToAddForOrder);
+            $('#modalAddMaterialToOrderFastNameMat').text(nameMaterToAddForOrder);
+            $('#modalAddMaterialToOrderFast').modal('show');
+        }
+        target = target.parentNode;
+    }
+
+    return false;
+});
