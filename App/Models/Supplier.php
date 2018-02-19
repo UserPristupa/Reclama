@@ -29,6 +29,7 @@ class Supplier extends ModelLikeTable
     {
         // TODO: Implement isNew() method.
         if(empty($this->id) || is_null($this->id)){
+            //            echo "ДА ЭТО НОВЫЙ ПОСТАВЩИК";
             return true;
         }
         else{

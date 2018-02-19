@@ -33,7 +33,7 @@ function activate (id/*,handler*/) {
 		$mysql_host = 'localhost';
         // MySQL username
         $mysql_username = 'root';
-		$mysql_database = 'reclama';
+		$mysql_database = 'reclam';
 		$mysql_password = NULL;
 		$sql="SELECT * FROM menu";
 		$mysqli = mysqli_connect($mysql_host, $mysql_username,$mysql_password,$mysql_database);
@@ -102,7 +102,7 @@ function activate (id/*,handler*/) {
 		$mysql_host = 'localhost';
         // MySQL username
         $mysql_username = 'root';
-		$mysql_database = 'reclama';
+		$mysql_database = 'reclam';
 		$mysql_password = NULL;
 		$sql="SELECT handler FROM menu WHERE title='".$title."';";
 		$mysqli = mysqli_connect($mysql_host, $mysql_username,$mysql_password,$mysql_database);

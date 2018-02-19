@@ -32,8 +32,8 @@ function showFromFields($idTable, $arrAll = [], $filds_nameToView){
                       <td>$filds_nameToView[isReady]</td>
                       <td>$filds_nameToView[isCompleted]</td>
                       <td>$filds_nameToView[payment]</td>
-                      <td></td>
-                      <td></td>
+                      <td>просмотр</td>
+                      <td>удалить</td>
                   </tr>
             </thead>
             <tbody>";
@@ -85,7 +85,7 @@ function showFromFields($idTable, $arrAll = [], $filds_nameToView){
                                  $isReady
                                  $isAllow
                                  $payment
-                                 <td ><a href='viewOneOrder.php?id=$rowItem[idOrder]' ><span class='glyphicon glyphicon-edit'> просмотр</span></a></td>
+                                 <td ><a data-id= $rowItem[idOrder] href='viewOneOrder.php?id=$rowItem[idOrder]' ><span class='glyphicon glyphicon-edit'> просмотр</span></a></td>
                                  <td ><button data-id=$rowItem[idOrder]><span class='glyphicon glyphicon-trash'></span></button></td>
                 </tr>";
             endforeach;
@@ -128,37 +128,63 @@ function showFromFields($idTable, $arrAll = [], $filds_nameToView){
                 <div class="row rowSearch" ><!-- строка поиска-->
                             <!--  сторка для поиска заказов по клиенту и по названию заказа -->
 <!--                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"></div>-->
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <label for="inputFindOrderForName">искать по названию заказа</label>
-                        <input type="text" name="inputFindOrderForName" placeholder="по названию">
-                        <button name="searchForName" class="btn-primary">искать </button>
+                    <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                                <label for="" class="">искать заказ</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+<!--                                <label for="inputFindOrderForName">искать по названию заказа</label>-->
+                                <input type="text" name="inputFindOrderForName" placeholder="по названию">
+                                <button name="searchForName" class="btn-primary">искать </button>
+                            </div>
+                            <div class="col-lg-6 col-md-76 col-sm-6 col-xs-6">
+<!--                                <label for="inputFindOrderForNameClient">по названию клиента</label>-->
+                                <input type="text" name="inputFindOrderForNameClient" placeholder="по клиенту">
+                                <button name="searchForNameClient" class="btn-primary">искать</button>
+
+                            </div>
+
+                        </div>
                     </div>
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-                        <label for="inputFindOrderForNameClient">искать по названию клиента</label>
-                        <input type="text" name="inputFindOrderForNameClient" placeholder="по клиенту">
-                        <button name="searchForNameClient" class="btn-primary">искать</button>
-                    </div>
-                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                        <label for="viewTrashedOrders">заказы в корзине</label>
-                        <div title="показать удаленные заказы" class="viewTrashedOrders" id="viewTrashedOrders">
-                                <span class="glyphicon glyphicon-eye-open" style="padding-left: 10px;padding-right: 10px"></span>
-                                <span class="glyphicon glyphicon-trash"> </span>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <label for="viewTrashedOrders">заказы в корзине</label>
+                                <div title="показать удаленные заказы" class="viewTrashedOrders" id="viewTrashedOrders">
+                                    <span class="glyphicon glyphicon-eye-open" style="padding-left: 10px;padding-right: 10px"></span>
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <label for="makeNewOrder"  class="text-center">новый заказ</label>
+                                <div title="создать новый заказ" id="makeNewOrder" class="addNewOrder">
+                                    <!--  <a href='formAddNewOrder.php'> <div class="text-center"> <span class='glyphicon glyphicon-plus'></span></div></a> -->
+                                    <a id="aOnclick"> <div class="text-center"> <span class='glyphicon glyphicon-plus'></span></div></a>
+                                    <script type="text/javascript">
+                                        $('#makeNewOrder').on('click',includeFormAddNewOrder);
+                                        function includeFormAddNewOrder() {
+
+                                            jquery_send('#main_modul','post','/templates/controllerViewAllOrders.php',['includeFormNewOrder'],['']);
+                                            //event.stopPropagation();
+                                            //                            document.getElementById("#main_modul").innerHTML= '<?// echo  include ('formAddNewOrder.php');?>//';
+                                            return false;
+                                        }
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
                         </div>
                     </div>
                     <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-                        <label for="makeNewOrder"  class="text-center">новый заказ</label>
-                        <div title="создать новый заказ" id="makeNewOrder"></div>
-                        <a href='formAddNewOrder.php'> <div class="text-center"> <span class='glyphicon glyphicon-plus'></span></div></a>
-                        <a id="aOnclick"> <div class="text-center"> <span class='glyphicon glyphicon-plus'></span></div></a>
-                    <script type="text/javascript">
-                        $('#aOnclick').on('click',includeFormAddNewOrder);
-                        function includeFormAddNewOrder() {
-                            jquery_send('#main_modul','post','/templates/controllerViewAllOrders.php',['includeFormNewOrder'],['']);
-//event.stopPropagation();
-//                            document.getElementById("#main_modul").innerHTML= '<?// echo  include ('formAddNewOrder.php');?>//';
-                            return false;
-                        }
-                    </script>
+
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+
                     </div>
                 </div><!-- конец блока строки поиска  -->
                 <div class="row backForDiv divForTable"><!-- строка показа в таблице заказов-->
@@ -179,7 +205,8 @@ function showFromFields($idTable, $arrAll = [], $filds_nameToView){
             </div>
         </div>
         <!-- подключение модального окна которое будет всплывать при нажатии кнопки удалить-->
-        <?php include_once ('App/html/viewAllOrdersModal.html');?>
+        <?php include_once './App/html/viewAllOrdersModal.html';?>
+        <?php// include_once '/App/html/viewAllOrdersModal.html';?>
         <script src = '/js/viewAllOrders.js'></script>
     </div><!-- container -->
 </body>

@@ -87,10 +87,10 @@ showLi('');
         <!--рабочее место справа-->
         <div class="col-lg-10 backForDiv ">
             <!--строка показа времени и показа результата добавки материала в базу  -->
-            <?php  include_once 'App/html/forDisplayTimeShowAnswerServer.html'?>
+            <?php  include_once '../App/html/forDisplayTimeShowAnswerServer.html'?>
             <!--  блок отображения что меняем и кнокпки обновить страницу и кнопка править(покажет поля для внесения новых значений)  -->
             <div class="row headingContent">
-                <div class="col-lg-2 text-left "><h6> просмотр/правка заказа</div></h6>
+                <div class="col-lg-2 text-left "><h6> просмотр/правка заказа</h6></div>
                 <div class="col-lg-6 text-center "><h4> <?php echo $order->name; ?> для <?php echo $nameClient; ?></h4></div>
 <!--                <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center"><button class="btn btn-sm btn-default" id="btnUpdateShow" >обновить</button></div>-->
                 <div class="col-lg-2  text-center"">
@@ -807,13 +807,13 @@ var ORDER_NEW ;
     </div>
     <?php
     //подключение модального окна для просмотра материалов к заказу
-    include_once('viewAllMaterialsToOrder.html');
+    include_once'viewAllMaterialsToOrder.html';
     //подключение модального окна для добавления материалов к заказу
-    include_once('formAddMaterialToOrderModal.html');
+    include_once'formAddMaterialToOrderModal.html';
     //подключение модального окна просмотра всех оплат по этому заказу
-    include_once ('App/html/viewModalAllPaymentsForThisOrder.html');
+    include_once '../App/html/viewModalAllPaymentsForThisOrder.html';
     //подключим модальное окно быстрой добавки материала к заказу по двойному клику в таблице всех материалов (в модальном окне)
-    include_once ('App/html/modalWindowAddMaterToOrderFast.html');
+    include_once '../App/ html/modalWindowAddMaterToOrderFast.html';
     ?>
 
 </div>

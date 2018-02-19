@@ -19,7 +19,7 @@ class Db
         return $this->dbh;
     }
     //1 вопрос надо ли создавать кроме $dbh  еще 3 другие переменные или достаточно в конструкторе своих внутренних переменных
-    public function __construct(string $user='root', string $pass='')
+    public function __construct( $user='root',  $pass='')
     {
         //var_dump('<br>path, где лежит Db.php :  '.__DIR__.'<br>');
         $config = include (__DIR__.'/../config.php');
@@ -28,8 +28,15 @@ class Db
        // var_dump('<br>вывод из функции __constructor str 26 переменная $config<br>'.$config);
         //если передали параметры в метод, то вызов будет от имени переданных user & password
         //иначе по умолчанию 'user'=> 'root', 'password'=> ''
-        $this->user = $user;
-        $this->pass = $pass;
+        if(is_null($user))
+            $this->user = $config['user'];
+        else
+            $this->user = $user;
+        if(is_null($pass))
+            $this->pass=$config['password'];
+        else
+            $this->pass = $pass;
+
 
         $this->dns = 'mysql:host='.$config['host'].';dbname='.$config['dbname'];
         $this->dbh = new \PDO($this->dns,$this->user,$this->pass);
@@ -40,7 +47,7 @@ class Db
      * @param array $params
      * @return bool rez ot query (true or false)
      */
-    public function execute(string  $sqlString, $params = []){
+    public function execute(  $sqlString, $params = []){
         //для операций вставки, апдейта, удаления вернет удачно или не удачно
 //        echo ('запрос в базу '.$sqlString);
 //        echo ('параметры запроса в виде массива  на строку ниже <br> '.$params);
@@ -48,6 +55,10 @@ class Db
 //        die();
         $sth = $this-> dbh->prepare($sqlString);
         $res = $sth->execute($params);//вернет true or false
+//        if(false == $res)
+//            echo "from db  = false";
+//        else    echo "from db  = $res";
+
         return $res;
     }
 
@@ -56,7 +67,7 @@ class Db
      * @param $class
      * @return $class[] in true rez or fasle in false query
      */
-    public function query(string $sqlString, $class){
+    public function query( $sqlString, $class){
 //        для получения данных по запросу
 //        var_dump('<br>зашли в function query in Db.php<br>');
 //        var_dump('в function query in Db.php пришел запрос : '.$sqlString);

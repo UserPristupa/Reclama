@@ -10,7 +10,8 @@ dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
+figure, figcaption, footer, header,
+/*hgroup,*/
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -22,7 +23,9 @@ time, mark, audio, video {
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+footer, header,
+/*hgroup,*/
+menu, nav, section {
 	display: block;
 }
 body {
@@ -45,7 +48,9 @@ table {
 }
 /* End of Eric Meyer's CSS Reset */
 
-article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+article, aside, details, figcaption, figure, footer, header,
+/*hgroup,*/
+main, nav, section, summary {
 	display: block;
 }
 .wrapper{
@@ -228,8 +233,8 @@ margin:10px;
 	/*font-family: 'fontawesome';*/
 	font: normal normal normal 18px/1 FontAwesome;
 	content: "\f007";
-	width:15;
-	height:15;
+	width:15px;
+	height:15px;
 	
 }
 .fa-bar-chart:before{
@@ -447,12 +452,12 @@ table {
                         justify-content: center;
                         align-items: center;*/
                     }
-/*table a{
-    min-width: 100px;
+table a{
+   /* min-width: 100px;
     display: block;
     border: black 1px solid;
     border-radius: 4px;
-    padding: 6px;
+    padding: 6px;*/
     /*padding :5px 15px;*/
     text-decoration: none;
 }
@@ -560,7 +565,7 @@ table {
 #viewAllOrdersModal .modal-dialog{
     width: 400px!important;
 }
-.viewTrashedOrders{
+.viewTrashedOrders ,.addNewOrder{
     border: 1px solid black;
     background-color: #5bc0de;
     border-radius: 5px;
@@ -570,7 +575,7 @@ table {
     justify-content: center;
     align-items: center;
 }
-.viewTrashedOrders:hover{
+.viewTrashedOrders:hover,.addNewOrder:hover{
     cursor:pointer;
 }
 .rowSearch{

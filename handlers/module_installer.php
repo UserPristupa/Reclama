@@ -30,7 +30,7 @@
                 // MySQL password
                 $mysql_password = NULL;
                 // Database name
-                $mysql_database = 'reclama';
+                $mysql_database = 'reclam';
 
                 // Connect to MySQL server
                 $mysqli = mysqli_connect($mysql_host, $mysql_username,$mysql_password,$mysql_database) or file_put_contents("reclama_debug.log",'Error connecting to MySQL server: ' . mysql_error());

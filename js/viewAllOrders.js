@@ -31,8 +31,24 @@ $('#table_Orders').on('click', function () {
         }
         return false;
     }
-    
+    //если кликнули на просмотре одного конкретного заказа то найдем атрибут href ( в нем уже будет id Заказа, который надо показать)
+    if(target.closest('a')){
+        console.log('хотим перейти на просмотр одного заказа');
+        if(target.nodeName == 'SPAN')
+            target = target.parentNode;
+        var tarHref = $(target).attr('href');
+        console.log('tarHref=' + tarHref);
+        var idOneOrder = $(target).data('id');
+        console.log('idOrderForView=' + idOneOrder);
+        includeViewOneOrder(tarHref,idOneOrder);
+        return false;
+
+
+        // if($(target).find('a').)
+    }
 });
+//клик для загрузки таблицы данных одного заказа
+
 //повесим поиск заказов на div .viewTrashedOrders
 $('.viewTrashedOrders').on('click',function () {
     console.log('нажали div в строке поиска для показа заказов в корзине  ');
@@ -139,3 +155,9 @@ $('.rowSearch').ready().on('click',function () {
 //         return false;
 //     }
 // }
+
+//функция подтяжки в id='#main_modul' viewOneOrder.js с заданным id 
+function includeViewOneOrder(tarHref,idOneOrder) {
+    jquery_send('#main_modul','get','/templates/controllerViewAllOrders.php',['includeViewOneOrder','tarHref','id'],['',tarHref, idOneOrder]);
+    
+}

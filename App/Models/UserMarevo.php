@@ -12,15 +12,6 @@ use App\Db;
 
 class User extends ModelLikeTable
 {
-//    protected $id;
-//    protected $name;
-//    protected $login;
-//    protected $password;
-//    protected $gmail;
-//    protected $secretQuestion;
-//    protected $secretAnswer;
-//    protected $session;
-//    protected $updated;
     public $id;
     public $name;
     public $login;

@@ -23,11 +23,11 @@ if(isset($_POST['sendOrderToTrash'])){
     }
 }
 //выкидывает на клиент отображение результата успешного запроса с определенным сообщением
-function showOnClientUspehWithText(string $message){
+function showOnClientUspehWithText( $message){
     echo "<script>fUspehAll('$message');</script>";
 }
 //выкидывает на клиент отображение результата не успешного запроса с определенным сообщением
-function showOnClientNeUspehWithText(string $message){
+function showOnClientNeUspehWithText( $message){
     echo "<script>fNoUspehAll('$message');</script>";
 }
 //запрос на отображение удаленных заказов
@@ -212,7 +212,7 @@ if(isset($_POST['searchOrderForName'])){
                     .$rowItem[name].'</td><td>'
                     .$rowItem[nameClient].'</td><td>'
                     .$rowItem[orderPrice].'</td>'
-                    .$isReady.$isAllow.$payment.'<td><a href=\'viewOneOrder.php?id='.$rowItem[idOrder].'\' ><span class=\'glyphicon glyphicon-edit\'> просмотр</span></a></td>'
+                    .$isReady.$isAllow.$payment.'<td><a data-id='.$rowItem[idOrder].' href=\'viewOneOrder.php?id='.$rowItem[idOrder].'\' ><span class=\'glyphicon glyphicon-edit\'> просмотр</span></a></td>'
                     .'<td>'.$isTrash.'</td></tr>';
 
             endforeach;
@@ -231,8 +231,8 @@ if(isset($_POST['searchOrderForName'])){
 
 if(isset($_POST['includeFormNewOrder'])){
 //    include 'formAddNewOrder.php';
-    echo "привет";
-    include ('formAddNewOrder.php');
+    echo "привет->запрос на загрузку формы добавления заказа";
+    include 'formAddNewOrder.php';
 //    $formOneOrder = file_get_contents ('formAddNewOrder.php');
 //    $ifEx = file_exists('formANO.php') ;
 //    var_dump($ifEx);
@@ -241,4 +241,13 @@ if(isset($_POST['includeFormNewOrder'])){
 //    var_dump($formOneOrder);
 //    echo eval($formOneOrder);
 //echo "/templates/formAddNewOrder.php";
+}
+
+if(isset($_GET['includeViewOneOrder'])){
+    echo 'пришел запрос на подтяжку в #main_modul показа одного заказа с параметром id заказ    viewOneOrder.php?id=32';
+    if(isset($_GET['tarHref'])){
+        $tarHref = htmlspecialchars($_GET['tarHref']);
+        include 'viewOneOrder.php';
+    }
+
 }

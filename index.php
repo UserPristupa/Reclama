@@ -1,14 +1,14 @@
 <?
 session_start();
 require 'autoload.php';
-include "handlers/checkSession.php";
-$res=check_session();
-if($res=='unauthorized')
-{
-	include "authorization.php";
-}	
-else
-{
+//include "handlers/checkSession.php";
+//$res=check_session();
+//if($res=='unauthorized')
+//{
+//	include "authorization.php";
+//}
+//else
+//{
 	//session start
 	// проверка на авторизацию
 	// если нет параметра то грузим заказы
@@ -59,4 +59,4 @@ else
 });
 */
 </script>
-<?}?>
+<?//}?>
